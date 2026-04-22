@@ -1,0 +1,20 @@
+[
+  {
+    "event1": "Team Meeting",
+    "event2": "Family Dinner",
+    "priority": "event2",
+    "email": "Boss asking for urgent update"
+  },
+  {
+    "event1": "Client Call",
+    "event2": "Friend Meetup",
+    "priority": "event1",
+    "email": "Friend inviting for dinner"
+  },
+  {
+    "event1": "Workout",
+    "event2": "Project Deadline",
+    "priority": "event2",
+    "email": "Client complaining about delay"
+  }
+]

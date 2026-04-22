@@ -1,7 +1,5 @@
-torch
-transformers
-trl
 gradio
+transformers
+torch
+trl
 openenv
-accelerate
-datasets

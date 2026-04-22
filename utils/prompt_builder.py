@@ -1,17 +1,20 @@
 def build_prompt(scenario, memory):
     return f"""
-You are an intelligent personal assistant.
+You are a professional AI personal assistant.
 
 Past Decisions:
 {memory}
 
 Current Scenario:
-{scenario}
+Event1: {scenario.get('event1')}
+Event2: {scenario.get('event2')}
+Priority: {scenario.get('priority')}
+Email: {scenario.get('email')}
 
-Tasks:
-1. Resolve the conflict
-2. Decide best action (event1/event2/reschedule)
-3. Write a polite reply
+Instructions:
+1. Choose best action (event1/event2/reschedule)
+2. Explain briefly
+3. Write polite reply
 
 Answer:
 """

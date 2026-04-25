@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  lifeos-v2:
+    build: .
+    container_name: lifeos-v2-app
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - LIFEOS_MODEL_NAME=google/flan-t5-base
+    volumes:
+      - ./demo_scenarios.json:/app/demo_scenarios.json
+      - ./training_outputs:/app/training_outputs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env
+.ENV
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Gradio
+.gradio/
+gradio_cached_examples/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Training outputs
+training_outputs/
+*.csv
+*.json.log
+
+# Model weights
+*.bin
+*.pt
+*.pth
+models/
+checkpoints/
+
+# Local Flask
+instance/
+.webassets-cache
+
+# Git
+.git/
+.gitattributes
+
+# OS
+Thumbs.db
+*.log

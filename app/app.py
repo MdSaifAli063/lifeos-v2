@@ -1,10 +1,50 @@
 import os
+import sys
+import json
 from datetime import datetime
+from collections import defaultdict
 
-from flask import Flask, request, jsonify
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+# Ensure sibling packages are importable when running this file directly.
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(APP_DIR)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from flask import Flask, request, jsonify, render_template_string, send_file
+
+# Add CORS support
+try:
+    from flask_cors import CORS
+except ImportError:
+    CORS = None
+
+# Lazy import for transformers to avoid torch/sympy conflicts
+# The app will work in "rule-based mode" if model fails to load
+_transformers = None
+AutoTokenizer = None
+AutoModelForSeq2SeqLM = None
+
+def _lazy_import_transformers():
+    global _transformers, AutoTokenizer, AutoModelForSeq2SeqLM
+    if _transformers is None:
+        try:
+            from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+            _transformers = "loaded"
+        except Exception as e:
+            _transformers = f"error: {e}"
+            AutoTokenizer = None
+            AutoModelForSeq2SeqLM = None
 
 app = Flask(__name__)
+
+# Enable CORS for frontend communication
+if CORS:
+    CORS(app, resources={r"/*": {"origins": "*"}})
+
+# ----------------------------------
+# Episode Storage for Dashboard
+# ----------------------------------
+_episode_history = []
 
 # ----------------------------------
 # Model
@@ -21,6 +61,13 @@ def get_model():
     global _tokenizer, _model, _model_load_error
 
     if _tokenizer is None or _model is None:
+        # Lazy import to avoid torch/sympy conflicts at startup
+        _lazy_import_transformers()
+        
+        if AutoTokenizer is None or AutoModelForSeq2SeqLM is None:
+            _model_load_error = "transformers not available (torch/sympy conflict)"
+            return None, None
+            
         try:
             print(f"Loading model: {MODEL_NAME}")
             _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -238,6 +285,9 @@ Confidence: medium
 
 @app.route("/")
 def home():
+    frontend_path = os.path.join(PROJECT_ROOT, "frontend", "frontend.html")
+    if os.path.exists(frontend_path):
+        return send_file(frontend_path)
 
     return """
 <!DOCTYPE html>
@@ -765,6 +815,7 @@ min-height:68vh;
       <button class="agent-item" onclick="selectAgent('emotion', this)">Emotion Analyst</button>
       <button class="agent-item" onclick="selectAgent('rewrite', this)">Calm Rewriter</button>
       <button class="agent-item" onclick="selectAgent('mediate', this)">Neutral Mediator</button>
+      <button class="agent-item" onclick="window.location.href='/dashboard'" style="margin-top:12px;background:linear-gradient(90deg,#22d3ee,#8b5cf6);">🚀 Innovation Dashboard</button>
     </div>
 
     <button class="new-chat-btn" onclick="createNewChat()">+ New Chat</button>
@@ -1154,9 +1205,9 @@ def emotion():
 @app.route("/rewrite", methods=["POST"])
 def rewrite():
     data = request.get_json(silent=True) or {}
-    text = str(data.get("text", "")).strip()
+    text = str(data.get("text") or data.get("message") or "").strip()
     if not text:
-        return jsonify({"error": "text is required"}), 400
+        return jsonify({"error": "text or message is required"}), 400
 
     llm_level = data.get("llm_level", "advanced")
     result = rewrite_calm_message(text, llm_level=llm_level)
@@ -1216,6 +1267,412 @@ def health():
             "model_error": _model_load_error
         }
     )
+
+
+# ----------------------------------
+# OpenEnv Innovation Dashboard
+# ----------------------------------
+
+def record_episode(episode_data):
+    """Record an episode for dashboard visualization."""
+    episode_data["timestamp"] = datetime.now().isoformat()
+    _episode_history.append(episode_data)
+    # Keep last 100 episodes
+    if len(_episode_history) > 100:
+        _episode_history.pop(0)
+
+
+@app.route("/dashboard")
+def dashboard():
+    """Innovation Dashboard - Visualizes per-episode data for judges."""
+    
+    # Aggregate statistics
+    total_episodes = len(_episode_history)
+    
+    # Persona distribution
+    persona_counts = defaultdict(int)
+    for ep in _episode_history:
+        persona = ep.get("persona", {}).get("name", "Unknown")
+        persona_counts[persona] += 1
+    
+    # Drift events
+    drift_counts = defaultdict(int)
+    for ep in _episode_history:
+        policy = ep.get("policy", {})
+        drift = policy.get("version", "unknown")
+        drift_counts[drift] += 1
+    
+    # Tool usage stats
+    tool_stats = defaultdict(int)
+    for ep in _episode_history:
+        tools = ep.get("tool_results", {})
+        for tool_name in tools:
+            tool_stats[tool_name] += 1
+    
+    # Reward stats
+    rewards = [ep.get("total_reward", 0) for ep in _episode_history]
+    avg_reward = sum(rewards) / len(rewards) if rewards else 0
+    max_reward = max(rewards) if rewards else 0
+    min_reward = min(rewards) if rewards else 0
+    
+    # Recent episodes (last 10)
+    recent = _episode_history[-10:] if _episode_history else []
+    
+    html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OpenEnv Innovation Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* {{ box-sizing:border-box; margin:0; padding:0; }}
+body {{
+    font-family:'Inter',system-ui,sans-serif;
+    background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);
+    color:#f1f5f9; min-height:100vh; padding:24px;
+}}
+.dashboard-header {{
+    text-align:center; padding:32px 0;
+    background:linear-gradient(90deg,#22d3ee,#8b5cf6,#ec4899);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+}}
+.dashboard-header h1 {{ font-size:48px; margin-bottom:8px; }}
+.dashboard-header p {{ opacity:0.8; font-size:18px; }}
+
+.stats-grid {{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+    margin:32px 0;
+}}
+.stat-card {{
+    background:rgba(15,23,42,0.9); border:1px solid rgba(103,232,249,0.2);
+    border-radius:16px; padding:24px; text-align:center;
+}}
+.stat-card .value {{ font-size:42px; font-weight:700; color:#22d3ee; }}
+.stat-card .label {{ font-size:14px; opacity:0.7; margin-top:8px; }}
+
+.test-btn {{
+    display:inline-block; margin:20px auto; text-align:center;
+}}
+.test-btn button {{
+    background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+    padding:14px 32px; font-size:16px; border-radius:12px;
+    cursor:pointer; border:none; color:white; font-weight:600;
+    box-shadow:0 4px 20px rgba(139,92,246,0.4);
+}}
+.test-btn button:hover {{ transform:scale(1.05); }}
+
+.charts-row {{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:24px 0;
+}}
+.chart-card {{
+    background:rgba(15,23,42,0.9); border:1px solid rgba(103,232,249,0.15);
+    border-radius:16px; padding:20px;
+}}
+.chart-card h3 {{ font-size:18px; margin-bottom:16px; color:#94a3b8; }}
+
+.episode-table {{
+    width:100%; border-collapse:collapse; margin-top:24px;
+    background:rgba(15,23,42,0.9); border-radius:16px; overflow:hidden;
+}}
+.episode-table th {{
+    background:rgba(30,41,59,0.9); padding:16px; text-align:left;
+    font-size:13px; text-transform:uppercase; letter-spacing:0.5px;
+}}
+.episode-table td {{
+    padding:14px 16px; border-top:1px solid rgba(51,65,85,0.5);
+}}
+.episode-table tr:hover {{ background:rgba(30,41,59,0.5); }}
+
+.badge {{
+    display:inline-block; padding:4px 12px; border-radius:20px;
+    font-size:12px; font-weight:600;
+}}
+.badge-persona {{ background:rgba(139,92,246,0.2); color:#c4b5fd; }}
+.badge-drift {{ background:rgba(34,211,238,0.2); color:#67e8f9; }}
+.badge-reward {{ background:rgba(34,197,94,0.2); color:#4ade80; }}
+.badge-negative {{ background:rgba(239,68,68,0.2); color:#f87171; }}
+
+.delegation-graph {{
+    display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+    margin:20px 0;
+}}
+.delegation-node {{
+    background:linear-gradient(135deg,#1e293b,#334155);
+    border:1px solid rgba(103,232,249,0.3); border-radius:12px;
+    padding:16px 24px; text-align:center;
+}}
+.delegation-node .name {{ font-weight:600; color:#22d3ee; }}
+.delegation-node .action {{ font-size:13px; opacity:0.8; margin-top:4px; }}
+
+.empty-state {{
+    text-align:center; padding:60px; opacity:0.6;
+}}
+.empty-state h2 {{ font-size:24px; margin-bottom:12px; }}
+</style>
+</head>
+<body>
+
+<div class="dashboard-header">
+    <h1>🚀 OpenEnv Innovation Dashboard</h1>
+    <p>Real-time episode visualization for judges • Hackathon Demo</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="value">{total_episodes}</div>
+        <div class="label">Total Episodes</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{avg_reward:.1f}</div>
+        <div class="label">Avg Reward</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{max_reward}</div>
+        <div class="label">Max Reward</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{len(tool_stats)}</div>
+        <div class="label">Tools Used</div>
+    </div>
+</div>
+
+<div class="test-btn">
+    <button onclick="runTestEpisodes()">🚀 Run 5 Test Episodes</button>
+    <div id="testStatus" style="margin-top:12px; font-size:14px; opacity:0.8;"></div>
+</div>
+
+<script>
+async function runTestEpisodes() {{
+    const statusDiv = document.getElementById('testStatus');
+    statusDiv.innerHTML = 'Running episodes...';
+    for (let i = 0; i < 5; i++) {{
+        await fetch('/api/run-episode', {{method: 'POST'}});
+        statusDiv.innerHTML = `Episode ${{i+1}}/5 completed`;
+    }}
+    statusDiv.innerHTML = '✅ All episodes generated! Reloading...';
+    setTimeout(() => window.location.reload(), 800);
+}}
+</script>
+"""
+    
+    # Add charts if we have data
+    if total_episodes > 0:
+        # Persona chart data
+        persona_labels = list(persona_counts.keys())
+        persona_data = list(persona_counts.values())
+        
+        # Drift chart data
+        drift_labels = list(drift_counts.keys())
+        drift_data = list(drift_counts.values())
+        
+        html += f"""
+<div class="charts-row">
+    <div class="chart-card">
+        <h3>👤 Persona Distribution</h3>
+        <canvas id="personaChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <h3>📜 Policy Drift Events</h3>
+        <canvas id="driftChart"></canvas>
+    </div>
+</div>
+
+<div class="chart-card" style="margin:24px 0;">
+    <h3>📈 Reward Over Time</h3>
+    <canvas id="rewardChart" height="80"></canvas>
+</div>
+
+<h2 style="margin:32px 0 16px;">Recent Episodes</h2>
+<table class="episode-table">
+<thead>
+<tr>
+    <th>Episode</th>
+    <th>Persona</th>
+    <th>Drift Event</th>
+    <th>Delegation</th>
+    <th>Tools</th>
+    <th>Reward</th>
+</tr>
+</thead>
+<tbody>
+"""
+        
+        for i, ep in enumerate(recent):
+            persona = ep.get("persona", {})
+            policy = ep.get("policy", {})
+            delegation = ep.get("delegation", {})
+            tools = ep.get("tool_results", {})
+            reward = ep.get("total_reward", 0)
+            
+            persona_name = persona.get("name", "N/A")
+            drift = policy.get("version", "N/A")
+            
+            # Delegation nodes
+            del_nodes = ""
+            for agent, action in list(delegation.items())[:3]:
+                short_action = action[:40] + "..." if len(action) > 40 else action
+                del_nodes += f'<div class="delegation-node"><div class="name">{agent}</div><div class="action">{short_action}</div></div>'
+            
+            # Tool badges
+            tool_badges = ", ".join(tools.keys()) if tools else "none"
+            
+            reward_badge = "positive" if reward > 0 else "negative"
+            
+            html += f"""
+<tr>
+    <td>#{i+1}</td>
+    <td><span class="badge badge-persona">{persona_name}</span></td>
+    <td><span class="badge badge-drift">{drift}</span></td>
+    <td>{len(delegation)} agents</td>
+    <td>{tool_badges}</td>
+    <td><span class="badge badge-{reward_badge}">{reward}</span></td>
+</tr>
+"""
+        
+        html += """
+</tbody>
+</table>
+
+<script>
+// Persona Distribution Chart
+new Chart(document.getElementById('personaChart'), {
+    type: 'doughnut',
+    data: {
+        labels: """ + json.dumps(persona_labels) + """,
+        datasets: [{
+            data: """ + json.dumps(persona_data) + """,
+            backgroundColor: ['#8b5cf6','#22d3ee','#ec4899','#f59e0b','#10b981'],
+            borderWidth: 0
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } } }
+});
+
+// Drift Events Chart
+new Chart(document.getElementById('driftChart'), {
+    type: 'bar',
+    data: {
+        labels: """ + json.dumps(drift_labels) + """,
+        datasets: [{
+            label: 'Episodes',
+            data: """ + json.dumps(drift_data) + """,
+            backgroundColor: '#22d3ee',
+            borderRadius: 8
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { color: '#94a3b8' } }, x: { ticks: { color: '#94a3b8' } } }
+    }
+});
+
+// Reward Over Time Chart
+new Chart(document.getElementById('rewardChart'), {
+    type: 'line',
+    data: {
+        labels: """ + json.dumps([f"Ep {i+1}" for i in range(len(_episode_history))]) + """,
+        datasets: [{
+            label: 'Total Reward',
+            data: """ + json.dumps(rewards) + """,
+            borderColor: '#8b5cf6',
+            backgroundColor: 'rgba(139,92,246,0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 4,
+            pointBackgroundColor: '#8b5cf6'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#94a3b8' } },
+            x: { ticks: { color: '#94a3b8' } }
+        }
+    }
+});
+</script>
+"""
+    else:
+        html += """
+<div class="empty-state">
+    <h2>🎯 No Episodes Yet</h2>
+    <p>Run some episodes to see the dashboard populate with data.</p>
+    <p>Use the /api/run-episode endpoint to generate episodes.</p>
+</div>
+"""
+    
+    html += """
+<div style="text-align:center; padding:40px; opacity:0.6; font-size:14px;">
+    <p>OpenEnv Innovation Dashboard • Powered by LifeOS v2</p>
+</div>
+</body>
+</html>
+"""
+    return html
+
+
+@app.route("/api/run-episode", methods=["POST"])
+def api_run_episode():
+    """Run a single episode and record it for the dashboard."""
+    from openenv_env.env import LifeOSEnv
+    from openenv_env.personas import PERSONAS
+    
+    # Load scenarios
+    scenarios_path = os.path.join(PROJECT_ROOT, "demo_scenarios.json")
+    with open(scenarios_path, "r", encoding="utf-8") as f:
+        scenarios = json.load(f)
+    
+    env = LifeOSEnv(scenarios)
+    state = env.reset()
+    
+    # Simulate an action
+    action = "reschedule meeting to tomorrow"
+    state, reward, done, info = env.step(action)
+    
+    # Record episode for dashboard
+    episode_data = {
+        "scenario": info.get("scenario", {}),
+        "persona": info.get("persona", {}),
+        "policy": info.get("policy", {}),
+        "prediction": info.get("prediction", {}),
+        "workflow": info.get("workflow", []),
+        "plan": info.get("plan", []),
+        "delegation": info.get("delegation", {}),
+        "tool_results": info.get("tool_results", {}),
+        "reward_breakdown": info.get("reward_breakdown", {}),
+        "total_reward": reward,
+        "action": action
+    }
+    record_episode(episode_data)
+    
+    return jsonify({
+        "status": "success",
+        "episode_recorded": True,
+        "reward": reward,
+        "breakdown": info.get("reward_breakdown", {}),
+        "dashboard_url": "/dashboard"
+    })
+
+
+@app.route("/api/episodes", methods=["GET"])
+def api_episodes():
+    """Get all recorded episodes."""
+    return jsonify({
+        "total": len(_episode_history),
+        "episodes": _episode_history
+    })
+
+
+@app.route("/api/episode/latest", methods=["GET"])
+def api_episode_latest():
+    """Get the most recent episode."""
+    if not _episode_history:
+        return jsonify({"error": "No episodes recorded"})
+    return jsonify(_episode_history[-1])
 
 
 if __name__=="__main__":

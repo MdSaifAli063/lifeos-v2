@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOS v2 Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --bg-0: #070c24;
+            --bg-1: #0a1030;
+            --bg-2: #14163b;
+            --card: rgba(16, 22, 52, 0.92);
+            --card-soft: rgba(20, 27, 64, 0.78);
+            --border: rgba(95, 119, 216, 0.25);
+            --text-1: #f3f6ff;
+            --text-2: #b0bbeb;
+            --text-3: #8694ca;
+            --violet: #6d3bff;
+            --violet-2: #7e49ff;
+            --blue: #2ecbff;
+            --green: #2ae08f;
+            --red: #ff5a86;
+            --yellow: #ffd35e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(900px 640px at 100% 100%, rgba(112, 49, 190, 0.42), transparent 62%),
+                radial-gradient(760px 420px at -5% 72%, rgba(29, 161, 255, 0.16), transparent 60%),
+                linear-gradient(145deg, #050817 0%, #090f2e 48%, #120f35 100%);
+            color: var(--text-1);
+            min-height: 100vh;
+            padding: 14px 18px;
+        }
+
+        .app-shell {
+            display: grid;
+            grid-template-columns: 258px 1fr;
+            gap: 10px;
+            min-height: calc(100vh - 28px);
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            background:
+                radial-gradient(320px 250px at 0% 0%, rgba(38, 116, 200, 0.12), transparent 66%),
+                radial-gradient(410px 280px at 100% 100%, rgba(93, 44, 185, 0.15), transparent 62%),
+                linear-gradient(180deg, #050b22 0%, #05091b 42%, #040714 100%);
+            border: 1px solid rgba(71, 106, 201, 0.32);
+            border-radius: 12px;
+            padding: 12px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: inset 0 0 0 1px rgba(102, 128, 223, 0.08), 0 10px 22px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px 12px;
+            border-bottom: 1px solid rgba(105, 122, 186, 0.2);
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1px solid rgba(57, 141, 238, 0.35);
+            background: linear-gradient(145deg, rgba(7, 21, 61, 0.86), rgba(16, 31, 81, 0.62));
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            color: #32c4ff;
+            text-shadow: 0 0 8px rgba(42, 201, 255, 0.4);
+        }
+
+        .brand h1 {
+            font-size: 33px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.05;
+        }
+
+        .brand p {
+            color: #8f9cca;
+            font-size: 10.5px;
+            margin-top: 2px;
+        }
+
+        .menu {
+            display: grid;
+            gap: 6px;
+        }
+
+        .menu-btn {
+            border: 1px solid transparent;
+            background: transparent;
+            color: #d7ddff;
+            border-radius: 11px;
+            padding: 11px 12px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.1;
+        }
+
+        .menu-ico {
+            width: 20px;
+            text-align: center;
+            opacity: 0.95;
+            font-size: 14px;
+            color: #bfc9f8;
+        }
+
+        .menu-btn:hover {
+            border-color: rgba(123, 77, 255, 0.35);
+            background: rgba(123, 77, 255, 0.12);
+            color: var(--text-1);
+        }
+
+        .menu-btn.active {
+            color: #f4edff;
+            background: linear-gradient(90deg, #6736ff 0%, #4c2bdd 100%);
+            border-color: rgba(156, 128, 255, 0.52);
+            box-shadow: 0 8px 15px rgba(68, 34, 182, 0.3);
+        }
+
+        .profile-card,
+        .mode-card,
+        .promo-card,
+        .upgrade-card {
+            background: linear-gradient(180deg, rgba(7, 13, 35, 0.95), rgba(6, 10, 27, 0.9));
+            border: 1px solid rgba(70, 100, 196, 0.22);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .profile-card {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(150deg, #9ca8d8, #5965a8);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: #0e1230;
+            font-size: 11px;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.05;
+        }
+
+        .profile-sub {
+            color: #95a2d7;
+            font-size: 11px;
+        }
+
+        .mode-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13.5px;
+            color: #d5dcff;
+            padding: 10px 12px;
+        }
+
+        .promo-card {
+            min-height: 192px;
+            background:
+                radial-gradient(170px 96px at 50% 70%, rgba(252, 132, 240, 0.38), transparent 62%),
+                radial-gradient(300px 170px at 50% 102%, rgba(56, 26, 106, 0.85), transparent 76%),
+                linear-gradient(180deg, rgba(19, 25, 56, 0.55) 0%, rgba(10, 12, 32, 0.85) 70%);
+            color: #d7e0ff;
+            font-size: 12.5px;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::after {
+            content: "";
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            bottom: -20%;
+            height: 54%;
+            background:
+                linear-gradient(120deg, rgba(8, 10, 27, 0.9) 40%, rgba(10, 13, 33, 0.4) 60%),
+                radial-gradient(circle at 50% 18%, rgba(255, 170, 232, 0.65), rgba(201, 104, 255, 0.2) 35%, transparent 60%);
+            clip-path: polygon(0 100%, 0 60%, 12% 53%, 21% 57%, 30% 46%, 40% 58%, 50% 42%, 60% 56%, 70% 48%, 79% 57%, 88% 46%, 100% 58%, 100% 100%);
+            border-top: 1px solid rgba(148, 119, 255, 0.22);
+        }
+
+        .upgrade-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13.5px;
+            padding: 10px 12px;
+        }
+
+        .menu-btn .bi,
+        .mode-card .bi,
+        .upgrade-card .bi {
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .brand-mark .bi {
+            font-size: 24px;
+        }
+
+        .promo-twinkle {
+            position: absolute;
+            color: #bd8eff;
+            font-size: 10px;
+            opacity: 0.9;
+        }
+
+        .promo-twinkle.left {
+            left: 18px;
+            top: 50%;
+        }
+
+        .promo-twinkle.right {
+            right: 18px;
+            top: 48%;
+        }
+
+        .promo-copy {
+            position: relative;
+            z-index: 2;
+            margin-top: 2px;
+            margin-left: 2px;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(82, 104, 189, 0), rgba(82, 104, 189, 0.38), rgba(82, 104, 189, 0));
+            margin: 4px 2px 2px;
+        }
+
+        .main {
+            background: linear-gradient(180deg, rgba(10, 16, 43, 0.86), rgba(8, 12, 35, 0.88));
+            border: 1px solid rgba(67, 95, 188, 0.22);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 2px 4px 4px;
+        }
+
+        .title h2 {
+            font-size: 41px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 5px;
+        }
+
+        .title p {
+            color: var(--text-2);
+            font-size: 12px;
+        }
+
+        .status-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chip {
+            background: var(--card-soft);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            min-width: 126px;
+        }
+
+        .chip-label {
+            font-size: 11px;
+            color: var(--text-3);
+            margin-bottom: 4px;
+        }
+
+        .chip-value {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 6px;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        .grid-main {
+            display: grid;
+            grid-template-columns: 1.12fr 1.35fr 1.03fr;
+            gap: 10px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 11px;
+            box-shadow: inset 0 0 0 1px rgba(156, 166, 255, 0.04);
+        }
+
+        .card h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .card-note {
+            color: var(--text-3);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .field {
+            margin-bottom: 10px;
+        }
+
+        .field label {
+            font-size: 11px;
+            color: var(--text-3);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            border: 1px solid rgba(123, 146, 255, 0.24);
+            background: rgba(9, 13, 33, 0.95);
+            border-radius: 9px;
+            color: var(--text-1);
+            padding: 10px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .field textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            border: 1px solid rgba(181, 61, 255, 0.55);
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--violet), var(--violet-2));
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 12px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.06);
+        }
+
+        .reasoning-wrap {
+            min-height: 402px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .agent-ring {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 288px;
+            border-radius: 14px;
+            background:
+                radial-gradient(circle at center, rgba(47, 132, 255, 0.18), rgba(19, 27, 62, 0.18) 46%, transparent 72%);
+            overflow: hidden;
+        }
+
+        .ring-core,
+        .ring-mid,
+        .ring-outer {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(108, 122, 210, 0.25);
+        }
+
+        .ring-core {
+            width: 188px;
+            height: 188px;
+            border-color: rgba(106, 131, 239, 0.42);
+            box-shadow: 0 0 22px rgba(67, 104, 255, 0.18);
+        }
+
+        .ring-mid {
+            width: 228px;
+            height: 228px;
+            border-style: dashed;
+            border-color: rgba(106, 131, 239, 0.35);
+        }
+
+        .ring-outer {
+            width: 266px;
+            height: 266px;
+            border-color: rgba(74, 99, 188, 0.28);
+        }
+
+        .brain-core {
+            width: 138px;
+            height: 138px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 32% 30%, rgba(48, 212, 255, 0.8), rgba(87, 78, 255, 0.68) 48%, rgba(181, 61, 255, 0.42));
+            box-shadow: 0 0 30px rgba(31, 200, 255, 0.3);
+            display: grid;
+            place-items: center;
+            font-size: 58px;
+            z-index: 5;
+        }
+
+        .agent-node {
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            width: 124px;
+            font-size: 11px;
+            color: var(--text-2);
+            z-index: 6;
+        }
+
+        .node-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            border: 1px solid rgba(136, 155, 241, 0.45);
+            background: rgba(12, 20, 52, 0.9);
+            box-shadow: 0 0 12px rgba(95, 119, 216, 0.25);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .node-calendar { color: #3bf3cf; border-color: rgba(47, 239, 193, 0.6); background: rgba(8, 53, 53, 0.85); }
+        .node-delegation { color: #ffb04d; border-color: rgba(255, 169, 77, 0.62); background: rgba(70, 38, 16, 0.85); }
+        .node-conflict { color: #ff6ba6; border-color: rgba(255, 107, 166, 0.58); background: rgba(73, 18, 47, 0.85); }
+        .node-email { color: #bd83ff; border-color: rgba(189, 131, 255, 0.62); background: rgba(50, 23, 73, 0.85); }
+        .node-memory { color: #35d2ff; border-color: rgba(53, 210, 255, 0.62); background: rgba(12, 45, 78, 0.85); }
+
+        .agent-node b {
+            color: var(--text-1);
+            display: block;
+            margin-bottom: 1px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .agent-node small {
+            color: var(--text-3);
+            font-size: 10px;
+            line-height: 1.1;
+            display: block;
+        }
+
+        .node-cal { top: 42px; left: 14px; }
+        .node-del { top: 42px; right: 12px; }
+        .node-con { bottom: 58px; left: 8px; }
+        .node-em { bottom: 58px; right: 8px; }
+        .node-mem { bottom: 16px; left: 50%; transform: translateX(-50%); }
+
+        .mini-chip {
+            border: 1px solid rgba(181, 61, 255, 0.45);
+            background: rgba(104, 53, 205, 0.22);
+            color: #d7b9ff;
+            border-radius: 999px;
+            font-size: 10px;
+            padding: 3px 8px;
+            margin-left: auto;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .card-link {
+            margin-left: auto;
+            font-size: 11px;
+            color: #8d99dd;
+        }
+
+        .progress-row {
+            font-size: 11px;
+            color: var(--text-3);
+            border: 1px solid rgba(95, 119, 216, 0.24);
+            border-radius: 10px;
+            padding: 8px 9px 7px;
+            background: rgba(10, 16, 40, 0.72);
+        }
+
+        .progress-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-percent {
+            color: #b9c5ff;
+            font-size: 12px;
+            min-width: 34px;
+            text-align: right;
+        }
+
+        .progress {
+            height: 7px;
+            border-radius: 999px;
+            background: rgba(74, 89, 160, 0.35);
+            margin-top: 7px;
+            overflow: hidden;
+        }
+
+        .progress > span {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4d7bff, #a94bff);
+            transition: width 0.3s ease;
+        }
+
+        .right-col {
+            display: grid;
+            gap: 12px;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+        }
+
+        .list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 11.5px;
+            color: var(--text-2);
+            border-bottom: 1px solid rgba(122, 146, 255, 0.12);
+            padding-bottom: 7px;
+        }
+
+        .row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .warning {
+            color: #ff92ad;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .quick-btn {
+            border: 1px solid rgba(122, 146, 255, 0.28);
+            border-radius: 9px;
+            background: rgba(11, 16, 39, 0.95);
+            color: var(--text-2);
+            padding: 8px;
+            font-size: 11.5px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .quick-btn:hover {
+            border-color: rgba(181, 61, 255, 0.5);
+            color: var(--text-1);
+        }
+
+        .grid-bottom {
+            display: grid;
+            grid-template-columns: 1.12fr 1.35fr 1.03fr;
+            gap: 10px;
+        }
+
+        .cap-item {
+            display: flex;
+            gap: 9px;
+            margin-bottom: 10px;
+            color: var(--text-2);
+            font-size: 12px;
+        }
+
+        .cap-item span {
+            color: var(--text-1);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .dot-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-top: 1px;
+            background: linear-gradient(140deg, rgba(31, 200, 255, 0.8), rgba(123, 77, 255, 0.8));
+        }
+
+        .resolution-list .res-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-2);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(122, 146, 255, 0.12);
+        }
+
+        .resolution-list .res-item:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .pill {
+            border-radius: 999px;
+            padding: 3px 9px;
+            font-size: 10px;
+            font-weight: 600;
+            border: 1px solid rgba(31, 218, 138, 0.35);
+            color: #92ffd2;
+            background: rgba(31, 218, 138, 0.12);
+        }
+
+        .promo-pro {
+            min-height: 142px;
+            background:
+                radial-gradient(180px 120px at 80% 100%, rgba(123, 77, 255, 0.55), transparent 62%),
+                linear-gradient(180deg, rgba(22, 31, 70, 0.96), rgba(14, 20, 46, 0.96));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(181, 61, 255, 0.55);
+            border-radius: 10px;
+            background: rgba(123, 77, 255, 0.2);
+            color: #efddff;
+            font-size: 12px;
+            padding: 9px 11px;
+            cursor: pointer;
+        }
+
+        .status-strip {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 0;
+        }
+
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        .single-page-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .single-page-grid .card {
+            min-height: 360px;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-soft {
+            border: 1px solid rgba(95, 119, 216, 0.35);
+            border-radius: 10px;
+            padding: 9px 12px;
+            background: rgba(14, 20, 46, 0.82);
+            color: #d7dfff;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .history-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .history-item {
+            border: 1px solid rgba(95, 119, 216, 0.24);
+            border-radius: 9px;
+            padding: 9px 10px;
+            background: rgba(9, 14, 36, 0.8);
+            font-size: 12px;
+            color: #d7dfff;
+        }
+
+        .metric {
+            background: var(--card-soft);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .metric .label {
+            font-size: 11px;
+            color: var(--text-3);
+            margin-bottom: 6px;
+        }
+
+        .metric .value {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .metric small {
+            color: var(--text-3);
+            font-size: 11px;
+        }
+
+        .ring {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 4px solid rgba(31, 218, 138, 0.22);
+            border-right-color: var(--green);
+            margin-left: auto;
+        }
+
+        .output-area {
+            margin-top: 10px;
+            border: 1px solid rgba(122, 146, 255, 0.24);
+            border-radius: 10px;
+            background: rgba(8, 12, 30, 0.9);
+            color: var(--text-2);
+            padding: 10px;
+            font-size: 12px;
+            line-height: 1.45;
+            max-height: 112px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .output-area.compact {
+            max-height: 86px;
+            font-size: 11.5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 1380px) {
+            .grid-main,
+            .grid-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .right-col {
+                grid-template-rows: none;
+            }
+
+            .status-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .single-page-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 980px) {
+            body {
+                padding: 8px;
+            }
+
+            .app-shell {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .sidebar {
+                order: 2;
+            }
+
+            .main {
+                order: 1;
+            }
+
+            .status-row {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .title h2 {
+                font-size: 24px;
+            }
+
+            .brand h1,
+            .menu-btn,
+            .profile-name,
+            .mode-card,
+            .promo-card,
+            .upgrade-card {
+                font-size: 16px;
+            }
+
+            .brand p,
+            .profile-sub {
+                font-size: 11px;
+            }
+
+            .menu-ico {
+                font-size: 13px;
+                width: 16px;
+            }
+
+            .brand-mark {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .promo-card {
+                min-height: 120px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark"><i class="bi bi-braces-asterisk"></i></div>
+                <div>
+                    <h1>LifeOS v2</h1>
+                    <p>Personal Conflict Resolution Agent</p>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button class="menu-btn active" data-page="dashboard"><span class="menu-ico"><i class="bi bi-grid-1x2-fill"></i></span>Dashboard</button>
+                <button class="menu-btn" data-page="resolver"><span class="menu-ico"><i class="bi bi-diagram-3"></i></span>Conflict Resolver</button>
+                <button class="menu-btn" data-page="emotion"><span class="menu-ico"><i class="bi bi-emoji-smile"></i></span>Emotion Detection</button>
+                <button class="menu-btn" data-page="rewriter"><span class="menu-ico"><i class="bi bi-pencil-square"></i></span>Response Rewriter</button>
+                <button class="menu-btn" data-page="mediation"><span class="menu-ico"><i class="bi bi-people"></i></span>Mediation Mode</button>
+                <button class="menu-btn" data-page="history"><span class="menu-ico"><i class="bi bi-clock-history"></i></span>Conflict History</button>
+            </div>
+            <div class="menu-divider"></div>
+
+            <div class="profile-card">
+                <div class="avatar">SA</div>
+                <div>
+                    <div class="profile-sub">Good Evening,</div>
+                    <div class="profile-name">Saif Ali</div>
+                </div>
+            </div>
+
+            <div class="mode-card">
+                <span><i class="bi bi-gem"></i> &nbsp; Executive Mode</span>
+                <span>&rsaquo;</span>
+            </div>
+
+            <div class="promo-card">
+                <span class="promo-copy">Focus on what matters,<br>LifeOS handles the rest.</span>
+                <span class="promo-twinkle left"><i class="bi bi-stars"></i></span>
+                <span class="promo-twinkle right"><i class="bi bi-stars"></i></span>
+            </div>
+
+            <div class="upgrade-card">
+                <span><i class="bi bi-lightning-charge"></i> &nbsp; Upgrade to Pro</span>
+                <span>&rsaquo;</span>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <div class="title">
+                    <h2 id="pageTitle">Good Evening, Saif Ali 👋</h2>
+                    <p id="pageSubtitle">I am here to help you resolve conflicts, manage tasks and optimize your day.</p>
+                </div>
+                <div class="status-row">
+                    <div class="chip">
+                        <div class="chip-label">Agent Status</div>
+                        <div class="chip-value">Active <span class="dot"></span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-label">Model</div>
+                        <div class="chip-value">LifeOS v2.1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-dashboard" class="page-view active">
+            <section class="grid-main">
+                <article class="card">
+                    <div class="title-row"><h3>Resolve New Conflict</h3></div>
+                    <p class="card-note">Describe your conflicting events and I'll handle the rest.</p>
+                    <div class="field">
+                        <label>Event / Task A</label>
+                        <input id="event1" value="Investor meeting at 7 PM">
+                    </div>
+                    <div class="field">
+                        <label>Event / Task B</label>
+                        <input id="event2" value="Mother's birthday dinner">
+                    </div>
+                    <div class="field">
+                        <label>Priority</label>
+                        <select id="priority">
+                            <option value="event1">Investor meeting</option>
+                            <option value="event2" selected>Birthday dinner</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Additional Context / Email / Message</label>
+                        <textarea id="email">Boss wants investor slides tonight and expects final deck today.</textarea>
+                    </div>
+                    <button id="resolveBtn" class="btn-primary">Resolve Conflict</button>
+                    <div id="resolveOutput" class="output-area">Resolution output will appear here.</div>
+                </article>
+
+                <article class="card reasoning-wrap">
+                    <div>
+                        <div class="title-row"><h3>LifeOS Reasoning Engine</h3><span class="mini-chip">Analyzing</span></div>
+                        <p class="card-note">Multi-agent decision analysis in progress...</p>
+                        <div class="agent-ring">
+                            <div class="ring-outer"></div>
+                            <div class="ring-mid"></div>
+                            <div class="ring-core"></div>
+
+                            <div class="agent-node node-cal">
+                                <span class="node-icon node-calendar"><i class="bi bi-calendar3"></i></span>
+                                <div><b>Calendar Agent</b><small id="node-cal-status">Checking availability</small></div>
+                            </div>
+                            <div class="agent-node node-del">
+                                <span class="node-icon node-delegation"><i class="bi bi-people"></i></span>
+                                <div><b>Delegation Agent</b><small id="node-del-status">Finding best options</small></div>
+                            </div>
+                            <div class="agent-node node-con">
+                                <span class="node-icon node-conflict"><i class="bi bi-shield-check"></i></span>
+                                <div><b>Conflict Analyzer</b><small id="node-con-status">Evaluating impact</small></div>
+                            </div>
+                            <div class="agent-node node-em">
+                                <span class="node-icon node-email"><i class="bi bi-envelope"></i></span>
+                                <div><b>Email Agent</b><small id="node-em-status">Drafting response</small></div>
+                            </div>
+                            <div class="agent-node node-mem">
+                                <span class="node-icon node-memory"><i class="bi bi-database"></i></span>
+                                <div><b>Memory Agent</b><small id="node-mem-status">Recalling preferences</small></div>
+                            </div>
+                            <div class="brain-core">🧠</div>
+                        </div>
+                    </div>
+                    <div class="progress-row">
+                        <div class="progress-head">
+                            <div id="engineText">Evaluating priorities, dependencies and outcomes...</div>
+                            <div class="progress-percent" id="enginePercent">72%</div>
+                        </div>
+                        <div class="progress"><span id="engineProgress"></span></div>
+                    </div>
+                </article>
+
+                <div class="right-col">
+                    <article class="card">
+                        <div class="title-row"><h3>Today's Schedule</h3><span class="card-link">View Calendar</span></div>
+                        <div class="list">
+                            <div class="row"><span>10:00 AM</span><span>Team Stand-up</span></div>
+                            <div class="row"><span>01:30 PM</span><span>Client Call</span></div>
+                            <div class="row"><span>04:00 PM</span><span>Project Review</span></div>
+                            <div class="row warning"><span>07:00 PM</span><span>Conflict Detected<br><small>Investor meeting / Birthday dinner</small></span></div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="title-row"><h3>Memory & Preferences</h3><span class="card-link">View All</span></div>
+                        <div id="memoryList" class="list">
+                            <div class="row"><span>Prefers family over work (Unless urgent)</span></div>
+                            <div class="row"><span>Dislikes late night meetings</span></div>
+                            <div class="row"><span>Mother's birthday is very important</span></div>
+                            <div class="row"><span>Prefers honest and polite email tone</span></div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-grid">
+                            <button class="quick-btn" id="emailAction"><span>✉</span>Email Assistant</button>
+                            <button class="quick-btn" id="delegateAction"><span>⎇</span>Delegation Hub</button>
+                            <button class="quick-btn" id="emotionAction"><span>⊕</span>Add Task</button>
+                            <button class="quick-btn" id="episodeAction"><span>📅</span>Schedule Planner</button>
+                        </div>
+                        <div id="quickOutput" class="output-area compact">Action results will appear here.</div>
+                    </article>
+
+                    <article class="card promo-pro">
+                        <h3>LifeOS Pro</h3>
+                        <p class="card-note">Unlock advanced features, deep memory and smarter agents.</p>
+                        <button class="btn-outline">Upgrade Now</button>
+                    </article>
+                </div>
+            </section>
+
+            <section class="grid-bottom">
+                <article class="card">
+                    <div class="title-row"><h3>Agent Capabilities</h3><span class="card-link">Learn More</span></div>
+                    <div class="cap-item"><i class="dot-icon"></i><div><span>Conflict Resolution</span>Resolve complex scheduling conflicts</div></div>
+                    <div class="cap-item"><i class="dot-icon"></i><div><span>Smart Delegation</span>Find and assign the right person</div></div>
+                    <div class="cap-item"><i class="dot-icon"></i><div><span>Email Generation</span>Context-aware email drafting</div></div>
+                    <div class="cap-item"><i class="dot-icon"></i><div><span>Predictive Scheduling</span>Predict and prevent future conflicts</div></div>
+                    <div class="cap-item"><i class="dot-icon"></i><div><span>Memory & Personalization</span>Learns your preferences over time</div></div>
+                </article>
+
+                <article class="card">
+                    <div class="title-row"><h3>Recent Resolutions</h3><span class="card-link">View All</span></div>
+                    <div id="resolutionList" class="resolution-list">
+                        <div class="res-item"><span class="check">✓</span><span>No resolutions yet. Run a conflict or episode.</span><span class="pill">Ready</span><span>now</span></div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Live API Status</h3>
+                    <div id="healthOutput" class="output-area compact">Checking backend health...</div>
+                </article>
+            </section>
+
+            <section class="status-strip">
+                <article class="metric">
+                    <div class="label">Conflicts Resolved</div>
+                    <div class="value" id="metricResolved">0</div>
+                    <small>auto-updated</small>
+                </article>
+                <article class="metric">
+                    <div class="label">Time Saved</div>
+                    <div class="value" id="metricSaved">0.0 hrs</div>
+                    <small>estimated</small>
+                </article>
+                <article class="metric">
+                    <div class="label">Emails Drafted</div>
+                    <div class="value" id="metricEmails">0</div>
+                    <small>from history</small>
+                </article>
+                <article class="metric">
+                    <div class="label">Tasks Delegated</div>
+                    <div class="value" id="metricDelegated">0</div>
+                    <small>from episodes</small>
+                </article>
+                <article class="metric">
+                    <div class="label">Success Rate</div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <div class="value" id="metricSuccess">0%</div>
+                        <div class="ring"></div>
+                    </div>
+                    <small>reward-based</small>
+                </article>
+            </section>
+            </div>
+
+            <div id="page-resolver" class="page-view">
+                <section class="single-page-grid">
+                    <article class="card">
+                        <h3>Conflict Resolver</h3>
+                        <p class="card-note">Dedicated page for conflict resolution.</p>
+                        <div class="field"><label>Task A</label><input id="r_event1" value="Board meeting"></div>
+                        <div class="field"><label>Task B</label><input id="r_event2" value="Family dinner"></div>
+                        <div class="field">
+                            <label>Priority</label>
+                            <select id="r_priority"><option value="event1">Task A</option><option value="event2">Task B</option></select>
+                        </div>
+                        <div class="field"><label>Context</label><textarea id="r_email">Need to finalize work and still respect family commitments.</textarea></div>
+                        <button class="btn-primary" id="resolverPageBtn">Resolve Conflict</button>
+                    </article>
+                    <article class="card">
+                        <h3>Resolution Result</h3>
+                        <div id="resolverPageOutput" class="output-area">Result will appear here...</div>
+                    </article>
+                </section>
+            </div>
+
+            <div id="page-emotion" class="page-view">
+                <section class="single-page-grid">
+                    <article class="card">
+                        <h3>Emotion Detection Module</h3>
+                        <p class="card-note">Analyze emotional tone and guidance.</p>
+                        <div class="field"><label>Text Input</label><textarea id="emotionPageText">I'm stressed and upset because timelines keep changing.</textarea></div>
+                        <button class="btn-primary" id="emotionPageBtn">Analyze Emotion</button>
+                    </article>
+                    <article class="card">
+                        <h3>Emotion Analysis</h3>
+                        <div id="emotionPageOutput" class="output-area">Analysis will appear here...</div>
+                    </article>
+                </section>
+            </div>
+
+            <div id="page-rewriter" class="page-view">
+                <section class="single-page-grid">
+                    <article class="card">
+                        <h3>Response Rewriter</h3>
+                        <p class="card-note">Turn heated language into calm professional communication.</p>
+                        <div class="field"><label>Original Message</label><textarea id="rewritePageText">This is a mess. Nobody is doing their job.</textarea></div>
+                        <div class="field"><label>LLM Level</label><select id="rewritePageLevel"><option value="advanced">Advanced</option><option value="standard">Standard</option></select></div>
+                        <button class="btn-primary" id="rewritePageBtn">Rewrite Calmly</button>
+                    </article>
+                    <article class="card">
+                        <h3>Rewritten Message</h3>
+                        <div id="rewritePageOutput" class="output-area">Rewritten response will appear here...</div>
+                    </article>
+                </section>
+            </div>
+
+            <div id="page-mediation" class="page-view">
+                <section class="single-page-grid">
+                    <article class="card">
+                        <h3>Mediation Mode</h3>
+                        <p class="card-note">Neutral AI facilitation between two sides.</p>
+                        <div class="field"><label>Side A</label><textarea id="mediatePageA">We must deliver quickly.</textarea></div>
+                        <div class="field"><label>Side B</label><textarea id="mediatePageB">We must protect quality.</textarea></div>
+                        <div class="field"><label>Shared Goal</label><input id="mediatePageGoal" value="Launch successfully with trust"></div>
+                        <button class="btn-primary" id="mediatePageBtn">Generate Mediation Plan</button>
+                    </article>
+                    <article class="card">
+                        <h3>Mediation Output</h3>
+                        <div id="mediatePageOutput" class="output-area">Mediation plan will appear here...</div>
+                    </article>
+                </section>
+            </div>
+
+            <div id="page-history" class="page-view">
+                <section class="single-page-grid">
+                    <article class="card">
+                        <h3>Conflict History</h3>
+                        <p class="card-note">Track previous resolutions, emotions, and trends.</p>
+                        <div class="page-actions">
+                            <button class="btn-soft" id="historyRefreshBtn">Refresh History</button>
+                            <button class="btn-soft" id="historyEpisodesBtn">Load Episodes</button>
+                        </div>
+                        <div id="historyPageOutput" class="output-area">History summary will appear here...</div>
+                    </article>
+                    <article class="card">
+                        <h3>Recent Conflict Records</h3>
+                        <div id="historyPageList" class="history-list">
+                            <div class="history-item">No records yet.</div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:5000";
+        const engineLines = [
+            "Evaluating priorities, dependencies and outcomes...",
+            "Running planner and predictor on current scenario...",
+            "Applying schema-drift policy checks...",
+            "Syncing memory context with reward signals..."
+        ];
+        let engineIndex = 0;
+        let resolveCount = 0;
+        const pageMeta = {
+            dashboard: {
+                title: "Good Evening, Saif Ali 👋",
+                subtitle: "I am here to help you resolve conflicts, manage tasks and optimize your day."
+            },
+            resolver: {
+                title: "Executive Resolver",
+                subtitle: "Resolve scheduling and priority conflicts with AI support."
+            },
+            emotion: {
+                title: "Emotion Detection",
+                subtitle: "Detect emotional tone and communication risk."
+            },
+            rewriter: {
+                title: "Response Rewriter",
+                subtitle: "Turn angry or stressed messages into calm responses."
+            },
+            mediation: {
+                title: "Mediation Mode",
+                subtitle: "Generate neutral mediation plans and shared outcomes."
+            },
+            history: {
+                title: "Conflict History",
+                subtitle: "Review previous resolutions and progress trends."
+            }
+        };
+
+        function setOutput(id, text) {
+            document.getElementById(id).textContent = text;
+        }
+
+        function asPretty(data) {
+            return typeof data === "string" ? data : JSON.stringify(data, null, 2);
+        }
+
+        function switchPage(pageName) {
+            document.querySelectorAll(".page-view").forEach(el => el.classList.remove("active"));
+            const target = document.getElementById(`page-${pageName}`);
+            if (target) {
+                target.classList.add("active");
+            }
+
+            document.querySelectorAll(".menu-btn").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.page === pageName);
+            });
+
+            const meta = pageMeta[pageName] || pageMeta.dashboard;
+            document.getElementById("pageTitle").textContent = meta.title;
+            document.getElementById("pageSubtitle").textContent = meta.subtitle;
+        }
+
+        async function checkHealth() {
+            try {
+                const res = await fetch(`${API_BASE}/health`);
+                const data = await res.json();
+                const status = data.status || "unknown";
+                const model = data.model_name || "N/A";
+                const ready = data.model_ready ? "ready" : "not ready";
+                const modelErr = data.model_error ? `\nModel error: ${data.model_error}` : "";
+                setOutput(
+                    "healthOutput",
+                    `Status: ${status}\nModel: ${model}\nModel state: ${ready}${modelErr}`
+                );
+            } catch (err) {
+                setOutput("healthOutput", "Backend unreachable. Start app with: python app/app.py");
+            }
+        }
+
+        function startEngineAnimation() {
+            let progress = 72;
+            const progressBar = document.getElementById("engineProgress");
+            const text = document.getElementById("engineText");
+            const percent = document.getElementById("enginePercent");
+            progressBar.style.width = `${progress}%`;
+            percent.textContent = `${Math.round(progress)}%`;
+            setInterval(() => {
+                progress += (Math.random() * 7) - 2.5;
+                if (progress > 92) progress = 68;
+                if (progress < 61) progress = 74;
+                progressBar.style.width = `${progress.toFixed(0)}%`;
+                percent.textContent = `${progress.toFixed(0)}%`;
+                engineIndex = (engineIndex + 1) % engineLines.length;
+                text.textContent = engineLines[engineIndex];
+            }, 2500);
+        }
+
+        async function refreshReasoningNodes() {
+            try {
+                const res = await fetch(`${API_BASE}/api/episode/latest`);
+                const data = await res.json();
+                if (!data || data.error) return;
+
+                const delegation = data.delegation || {};
+                const tools = data.tool_results || {};
+                const workflow = data.workflow || [];
+                const reward = Number(data.total_reward || 0);
+
+                document.getElementById("node-cal-status").textContent =
+                    workflow.length ? `Workflow steps: ${workflow.length}` : "Checking availability";
+                document.getElementById("node-del-status").textContent =
+                    Object.keys(delegation).length ? `Delegated: ${Object.keys(delegation).length} agents` : "Finding best options";
+                document.getElementById("node-con-status").textContent =
+                    reward >= 0 ? `Positive reward signal (${reward})` : `Risk detected (${reward})`;
+                document.getElementById("node-em-status").textContent =
+                    tools.rewrite ? "Rewrite tool activated" : "Drafting response";
+                document.getElementById("node-mem-status").textContent =
+                    data.persona?.name ? `Persona: ${data.persona.name}` : "Recalling preferences";
+            } catch (err) {
+                // keep defaults
+            }
+        }
+
+        function parseResolveResult(raw) {
+            const lines = String(raw || "").split("\n").map(s => s.trim()).filter(Boolean);
+            return lines.slice(0, 4);
+        }
+
+        function normalizeResolutionTitle(rawText) {
+            const cleaned = String(rawText || "")
+                .replace(/\\n/g, " ")
+                .replace(/[{}[\]"]/g, " ")
+                .replace(/\s+/g, " ")
+                .trim();
+            if (!cleaned) return "Conflict resolved";
+            return cleaned.length > 72 ? `${cleaned.slice(0, 72)}...` : cleaned;
+        }
+
+        function prependResolution(title, priorityLabel) {
+            const list = document.getElementById("resolutionList");
+            const item = document.createElement("div");
+            item.className = "res-item";
+            const cleanTitle = normalizeResolutionTitle(title);
+            item.innerHTML = `<span class="check">✓</span><span>${cleanTitle}</span><span class="pill">Resolved</span><span>${priorityLabel}</span>`;
+            list.prepend(item);
+            while (list.children.length > 6) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        async function resolveConflict() {
+            const payload = {
+                event1: document.getElementById("event1").value,
+                event2: document.getElementById("event2").value,
+                priority: document.getElementById("priority").value,
+                email: document.getElementById("email").value
+            };
+            const btn = document.getElementById("resolveBtn");
+            btn.disabled = true;
+            btn.textContent = "Resolving...";
+            try {
+                const res = await fetch(`${API_BASE}/resolve`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const text = await res.text();
+                setOutput("resolveOutput", text);
+                const highlights = parseResolveResult(text);
+                const shortTitle = highlights[0] || `${payload.event1} vs ${payload.event2}`;
+                prependResolution(shortTitle, payload.priority === "event1" ? "Work priority" : "Family priority");
+                resolveCount += 1;
+                await updateMetrics();
+                await refreshReasoningNodes();
+            } catch (err) {
+                setOutput("resolveOutput", `Resolve failed: ${err.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Resolve Conflict";
+            }
+        }
+
+        async function runEpisode() {
+            try {
+                const res = await fetch(`${API_BASE}/api/run-episode`, { method: "POST" });
+                const data = await res.json();
+                setOutput("quickOutput", `Episode recorded.\nReward: ${data.reward}\nDashboard URL: ${data.dashboard_url || "/dashboard"}`);
+                await updateMetrics();
+                await loadMemoryHints();
+                await refreshReasoningNodes();
+            } catch (err) {
+                setOutput("quickOutput", `Episode failed: ${err.message}`);
+            }
+        }
+
+        async function analyzeEmotion() {
+            try {
+                const text = document.getElementById("email").value || "I am stressed and overwhelmed";
+                const res = await fetch(`${API_BASE}/emotion`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                setOutput("quickOutput", `Emotion Analysis\n${asPretty(data)}`);
+            } catch (err) {
+                setOutput("quickOutput", `Emotion analysis failed: ${err.message}`);
+            }
+        }
+
+        async function draftEmail() {
+            try {
+                const message = document.getElementById("email").value;
+                const res = await fetch(`${API_BASE}/rewrite`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message, llm_level: "advanced" })
+                });
+                const data = await res.json();
+                setOutput("quickOutput", `Email Draft\n${data.result || asPretty(data)}`);
+            } catch (err) {
+                setOutput("quickOutput", `Email drafting failed: ${err.message}`);
+            }
+        }
+
+        async function delegateTask() {
+            try {
+                const sideA = document.getElementById("event1").value || "Critical work task";
+                const sideB = document.getElementById("event2").value || "Personal commitment";
+                const res = await fetch(`${API_BASE}/mediate`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        side_a: sideA,
+                        side_b: sideB,
+                        shared_goal: "Balance outcomes with minimum conflict"
+                    })
+                });
+                const data = await res.json();
+                setOutput("quickOutput", `Delegation/Mediation\n${data.result || asPretty(data)}`);
+            } catch (err) {
+                setOutput("quickOutput", `Delegation failed: ${err.message}`);
+            }
+        }
+
+        async function resolveConflictPage() {
+            const payload = {
+                event1: document.getElementById("r_event1").value,
+                event2: document.getElementById("r_event2").value,
+                priority: document.getElementById("r_priority").value,
+                email: document.getElementById("r_email").value
+            };
+            const btn = document.getElementById("resolverPageBtn");
+            btn.disabled = true;
+            btn.textContent = "Resolving...";
+            try {
+                const res = await fetch(`${API_BASE}/resolve`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const text = await res.text();
+                setOutput("resolverPageOutput", text);
+            } catch (err) {
+                setOutput("resolverPageOutput", `Resolve failed: ${err.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Resolve Conflict";
+            }
+        }
+
+        async function analyzeEmotionPage() {
+            try {
+                const text = document.getElementById("emotionPageText").value;
+                const res = await fetch(`${API_BASE}/emotion`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                setOutput("emotionPageOutput", asPretty(data));
+            } catch (err) {
+                setOutput("emotionPageOutput", `Emotion analysis failed: ${err.message}`);
+            }
+        }
+
+        async function rewriteMessagePage() {
+            try {
+                const message = document.getElementById("rewritePageText").value;
+                const llm_level = document.getElementById("rewritePageLevel").value;
+                const res = await fetch(`${API_BASE}/rewrite`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message, llm_level })
+                });
+                const data = await res.json();
+                setOutput("rewritePageOutput", data.result || asPretty(data));
+            } catch (err) {
+                setOutput("rewritePageOutput", `Rewrite failed: ${err.message}`);
+            }
+        }
+
+        async function mediatePage() {
+            try {
+                const side_a = document.getElementById("mediatePageA").value;
+                const side_b = document.getElementById("mediatePageB").value;
+                const shared_goal = document.getElementById("mediatePageGoal").value;
+                const res = await fetch(`${API_BASE}/mediate`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ side_a, side_b, shared_goal })
+                });
+                const data = await res.json();
+                setOutput("mediatePageOutput", data.result || asPretty(data));
+            } catch (err) {
+                setOutput("mediatePageOutput", `Mediation failed: ${err.message}`);
+            }
+        }
+
+        async function loadHistoryPage(showEpisodes = false) {
+            try {
+                const res = await fetch(`${API_BASE}/history`);
+                const data = await res.json();
+                setOutput("historyPageOutput", asPretty(data));
+            } catch (err) {
+                setOutput("historyPageOutput", `History load failed: ${err.message}`);
+            }
+
+            if (showEpisodes) {
+                try {
+                    const epRes = await fetch(`${API_BASE}/api/episodes`);
+                    const epData = await epRes.json();
+                    const episodes = epData.episodes || [];
+                    const container = document.getElementById("historyPageList");
+                    if (!episodes.length) {
+                        container.innerHTML = '<div class="history-item">No episodes recorded yet.</div>';
+                        return;
+                    }
+                    container.innerHTML = episodes.slice(-8).reverse().map((ep, idx) => {
+                        const persona = ep.persona?.name || "Unknown";
+                        const reward = ep.total_reward ?? 0;
+                        const policy = ep.policy?.version || "stable";
+                        return `<div class="history-item"><strong>#${idx + 1}</strong> Persona: ${persona}<br>Reward: ${reward} • Drift: ${policy}</div>`;
+                    }).join("");
+                } catch (err) {
+                    document.getElementById("historyPageList").innerHTML = `<div class="history-item">Episode load failed: ${err.message}</div>`;
+                }
+            }
+        }
+
+        async function loadMemoryHints() {
+            try {
+                const res = await fetch(`${API_BASE}/api/episode/latest`);
+                const data = await res.json();
+                if (!data || data.error) {
+                    return;
+                }
+                const persona = data.persona && data.persona.name ? data.persona.name : "Balanced Professional";
+                const drift = data.policy && data.policy.version ? data.policy.version : "stable";
+                const reward = data.total_reward !== undefined ? data.total_reward : "N/A";
+                const entries = [
+                    `Current persona context: ${persona}`,
+                    `Policy drift mode: ${drift}`,
+                    `Latest reward score: ${reward}`,
+                    "Prefers clear communication and practical options"
+                ];
+                const container = document.getElementById("memoryList");
+                container.innerHTML = entries.map(line => `<div class="row"><span>${line}</span></div>`).join("");
+            } catch (err) {
+                // Keep default memory list.
+            }
+        }
+
+        async function updateMetrics() {
+            let episodes = [];
+            let history = { total: 0, recent: [] };
+            try {
+                const epRes = await fetch(`${API_BASE}/api/episodes`);
+                const epData = await epRes.json();
+                episodes = epData.episodes || [];
+            } catch (err) {
+                episodes = [];
+            }
+
+            try {
+                const hRes = await fetch(`${API_BASE}/history`);
+                history = await hRes.json();
+            } catch (err) {
+                history = { total: 0, recent: [] };
+            }
+
+            const rewards = episodes.map(e => Number(e.total_reward || 0));
+            const positive = rewards.filter(r => r >= 0).length;
+            const success = rewards.length ? Math.round((positive / rewards.length) * 100) : 0;
+            const delegated = episodes.reduce((acc, ep) => acc + Object.keys(ep.delegation || {}).length, 0);
+            const emails = history.recent ? history.recent.length : 0;
+            const resolved = Math.max(history.total || 0, resolveCount);
+            const saved = (resolved * 0.75 + delegated * 0.2).toFixed(1);
+
+            document.getElementById("metricResolved").textContent = resolved;
+            document.getElementById("metricSaved").textContent = `${saved} hrs`;
+            document.getElementById("metricEmails").textContent = emails;
+            document.getElementById("metricDelegated").textContent = delegated;
+            document.getElementById("metricSuccess").textContent = `${success}%`;
+
+            if (episodes.length) {
+                const list = document.getElementById("resolutionList");
+                const latest = episodes.slice(-4).reverse();
+                list.innerHTML = latest.map((ep, idx) => {
+                    const scenarioRaw = ep.scenario && ep.scenario.title ? ep.scenario.title : `Conflict Case ${idx + 1}`;
+                    const scenario = normalizeResolutionTitle(scenarioRaw);
+                    const reward = ep.total_reward !== undefined ? ep.total_reward : 0;
+                    const age = idx === 0 ? "now" : `${idx + 1} ago`;
+                    return `<div class="res-item"><span class="check">✓</span><span>${scenario}</span><span class="pill">Resolved</span><span>${age} • R:${reward}</span></div>`;
+                }).join("");
+            }
+        }
+
+        document.getElementById("resolveBtn").addEventListener("click", resolveConflict);
+        document.getElementById("episodeAction").addEventListener("click", runEpisode);
+        document.getElementById("emotionAction").addEventListener("click", analyzeEmotion);
+        document.getElementById("emailAction").addEventListener("click", draftEmail);
+        document.getElementById("delegateAction").addEventListener("click", delegateTask);
+        document.getElementById("resolverPageBtn").addEventListener("click", resolveConflictPage);
+        document.getElementById("emotionPageBtn").addEventListener("click", analyzeEmotionPage);
+        document.getElementById("rewritePageBtn").addEventListener("click", rewriteMessagePage);
+        document.getElementById("mediatePageBtn").addEventListener("click", mediatePage);
+        document.getElementById("historyRefreshBtn").addEventListener("click", () => loadHistoryPage(false));
+        document.getElementById("historyEpisodesBtn").addEventListener("click", () => loadHistoryPage(true));
+
+        document.querySelectorAll(".menu-btn[data-page]").forEach(btn => {
+            btn.addEventListener("click", () => switchPage(btn.dataset.page));
+        });
+
+        startEngineAnimation();
+        checkHealth();
+        updateMetrics();
+        loadMemoryHints();
+        refreshReasoningNodes();
+        switchPage("dashboard");
+    </script>
+</body>
+</html>

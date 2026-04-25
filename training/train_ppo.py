@@ -9,6 +9,8 @@ import torch
 import json
 import sys
 import os
+import argparse
+import csv
 
 
 # -------------------------------------------------
@@ -25,18 +27,60 @@ from utils.prompt_builder import build_prompt
 
 
 # -------------------------------------------------
+# CLI args (fast/default/high)
+# -------------------------------------------------
+parser = argparse.ArgumentParser(
+    description="Train LifeOS PPO model"
+)
+parser.add_argument(
+    "--mode",
+    choices=["fast", "default", "high"],
+    default="default",
+    help=(
+        "fast: quick high-level training, "
+        "default: balanced, "
+        "high: stronger/slower training"
+    )
+)
+parser.add_argument(
+    "--output_dir",
+    default="training_outputs",
+    help="Directory for reward logs and training artifacts"
+)
+args = parser.parse_args()
+
+
+# -------------------------------------------------
 # Load scenarios
 # -------------------------------------------------
 with open("demo_scenarios.json", "r", encoding="utf-8") as f:
     scenarios = json.load(f)
 
 env = LifeOSEnv(scenarios)
+os.makedirs(args.output_dir, exist_ok=True)
 
 
 # -------------------------------------------------
 # Model
 # -------------------------------------------------
-model_name = "google/flan-t5-base"
+if args.mode == "fast":
+    model_name = "google/flan-t5-small"
+    total_epochs = 8
+    max_new_tokens = 40
+    learning_rate = 2e-6
+    ppo_epochs = 1
+elif args.mode == "high":
+    model_name = "google/flan-t5-base"
+    total_epochs = 80
+    max_new_tokens = 80
+    learning_rate = 8e-7
+    ppo_epochs = 3
+else:
+    model_name = "google/flan-t5-base"
+    total_epochs = 50
+    max_new_tokens = 60
+    learning_rate = 1e-6
+    ppo_epochs = 2
 
 tokenizer = AutoTokenizer.from_pretrained(
     model_name
@@ -55,10 +99,10 @@ ref_model = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(
 # Stable PPO Config
 # -------------------------------------------------
 config = PPOConfig(
-    learning_rate=1e-6,
+    learning_rate=learning_rate,
     batch_size=1,
     mini_batch_size=1,
-    ppo_epochs=2
+    ppo_epochs=ppo_epochs
 )
 
 ppo_trainer = PPOTrainer(
@@ -72,7 +116,13 @@ ppo_trainer = PPOTrainer(
 # -------------------------------------------------
 # Training Loop
 # -------------------------------------------------
-for epoch in range(50):
+print(f"Training mode: {args.mode}")
+print(f"Model: {model_name}")
+print(f"Epochs: {total_epochs}")
+
+reward_history = []
+
+for epoch in range(total_epochs):
 
     try:
         # Get scenario
@@ -100,7 +150,7 @@ for epoch in range(50):
         # -----------------------------------------
         output_ids = model.generate(
             **inputs,
-            max_new_tokens=60,
+            max_new_tokens=max_new_tokens,
             do_sample=False,
             no_repeat_ngram_size=3,
             repetition_penalty=1.4
@@ -179,6 +229,14 @@ for epoch in range(50):
         print(generated_text)
         print(f"\nReward: {reward}")
         print("-----------------------")
+        reward_history.append(
+            {
+                "epoch": epoch,
+                "reward": float(reward),
+                "mode": args.mode,
+                "model": model_name
+            }
+        )
 
 
     except Exception as e:
@@ -186,3 +244,25 @@ for epoch in range(50):
             f"Epoch {epoch} skipped: {e}"
         )
         continue
+
+
+if reward_history:
+    csv_path = os.path.join(args.output_dir, "reward_log.csv")
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["epoch", "reward", "mode", "model"])
+        writer.writeheader()
+        writer.writerows(reward_history)
+
+    json_path = os.path.join(args.output_dir, "reward_log.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(reward_history, f, indent=2)
+
+    rewards = [row["reward"] for row in reward_history]
+    avg_reward = sum(rewards) / len(rewards)
+    print("\nTraining summary")
+    print(f"- Logged epochs: {len(reward_history)}")
+    print(f"- Avg reward: {avg_reward:.2f}")
+    print(f"- Max reward: {max(rewards):.2f}")
+    print(f"- Min reward: {min(rewards):.2f}")
+    print(f"- Reward CSV: {csv_path}")
+    print(f"- Reward JSON: {json_path}")

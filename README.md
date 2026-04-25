@@ -3,6 +3,9 @@
 ## 🚀 Overview
 LifeOS v2 is an AI-powered personal assistant trained using reinforcement learning to handle real-life conflicts such as meeting clashes, personal commitments, and difficult email replies.
 
+## 🎤 One-Line Strong Pitch
+LifeOS v2 is an emotionally intelligent conflict copilot that detects tone, rewrites heated messages calmly, tracks conflict history, and guides both sides toward resolution.
+
 ---
 
 ## ❗ Problem
@@ -27,7 +30,12 @@ We built a custom OpenEnv environment where an AI agent:
 - 🔁 Multi-step workflow engine  
 - 🔄 Schema drift simulation (API/data changes)  
 - 🤖 Reinforcement Learning (TRL PPO)  
-- 🖥️ Live Gradio demo  
+- 🧩 Emotion detection module  
+- 🗣️ Response rewriter (angry message -> calm version)  
+- 📊 Conflict progress dashboard  
+- 🤝 Mediation mode (neutral AI facilitator)  
+- 📁 Conflict history tracking  
+- 🖥️ Live demo interface  
 
 ---
 
@@ -64,6 +72,46 @@ We trained the model using PPO to maximize:
 
 ## 🎥 Demo Video
 👉 [Add YouTube link]
+
+---
+
+## ✅ Submission Readiness
+
+### Minimum Requirements
+- OpenEnv usage: implemented in `openenv_env/env.py` and listed in `requirements.txt`.
+- Training with HF TRL:
+  - Full pipeline: `training/train_ppo.py`
+  - Minimal Colab-friendly script: `training/train_ppo_colab.py`
+- Mini-blog / mini-video (<2 min): add your final published link.
+- Hosted OpenEnv app on Hugging Face Spaces: add your Space URL.
+
+Use `SUBMISSION_CHECKLIST.md` for final pre-submission verification.
+
+---
+
+## 📈 Show Reward Improvement (for judging)
+
+Run fast training and generate reward logs:
+
+```bash
+python training/train_ppo.py --mode fast --output_dir training_outputs
+```
+
+This creates:
+- `training_outputs/reward_log.csv`
+- `training_outputs/reward_log.json`
+
+You can use these artifacts during your pitch to show training progress.
+
+---
+
+## 🧪 Colab Minimal Training (HF TRL)
+
+```bash
+python training/train_ppo_colab.py
+```
+
+This script is intentionally minimal for quick demo/training walkthroughs.
 
 ---
 

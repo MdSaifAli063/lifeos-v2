@@ -1,0 +1,9 @@
+epoch,reward,mode,model
+0,-10.0,fast,google/flan-t5-small
+1,-10.0,fast,google/flan-t5-small
+2,-10.0,fast,google/flan-t5-small
+3,-10.0,fast,google/flan-t5-small
+4,-10.0,fast,google/flan-t5-small
+5,-10.0,fast,google/flan-t5-small
+6,-10.0,fast,google/flan-t5-small
+7,25.0,fast,google/flan-t5-small

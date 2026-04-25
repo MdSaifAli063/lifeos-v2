@@ -1,0 +1,50 @@
+[
+  {
+    "epoch": 0,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 1,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 2,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 3,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 4,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 5,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 6,
+    "reward": -10.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  },
+  {
+    "epoch": 7,
+    "reward": 25.0,
+    "mode": "fast",
+    "model": "google/flan-t5-small"
+  }
+]

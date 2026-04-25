@@ -1,4 +1,4 @@
-# Deploy LifeOS v2 to Hugging Face Spaces
+# Deploy AetherMind to Hugging Face Spaces
 
 This guide helps you complete the final submission requirement: hosting your OpenEnv-compliant app on Hugging Face Spaces.
 

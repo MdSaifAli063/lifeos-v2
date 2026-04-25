@@ -1,4 +1,4 @@
-# LifeOS v2 Submission Checklist
+# AetherMind Submission Checklist
 
 Use this as your final pre-submission checklist.
 
@@ -50,7 +50,7 @@ Use this as your final pre-submission checklist.
 ## Quick Pitch Materials (ready to present)
 
 - One-line pitch:
-  - *LifeOS v2 is an emotionally intelligent AI agent that resolves scheduling conflicts, rewrites tense communication, and mediates outcomes using an OpenEnv-based RL environment.*
+  - *AetherMind is an emotionally intelligent AI agent that resolves scheduling conflicts, rewrites tense communication, and mediates outcomes using an OpenEnv-based RL environment.*
 
 - Demo script:
   1. Start app: `python app/app.py`

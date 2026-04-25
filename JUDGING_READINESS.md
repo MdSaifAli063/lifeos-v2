@@ -1,4 +1,4 @@
-# LifeOS v2 Judging Readiness
+# AetherMind Judging Readiness
 
 This document maps the project to each official judging requirement and criterion.
 

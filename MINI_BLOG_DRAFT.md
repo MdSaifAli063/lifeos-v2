@@ -1,6 +1,6 @@
-# LifeOS v2: Autonomous Conflict-Resolution Agent in OpenEnv
+# AetherMind: Autonomous Conflict-Resolution Agent in OpenEnv
 
-LifeOS v2 is an autonomous AI agent that resolves real-world conflicts such as overlapping commitments, difficult email responses, and negotiation trade-offs.
+AetherMind is an autonomous AI agent that resolves real-world conflicts such as overlapping commitments, difficult email responses, and negotiation trade-offs.
 
 ## The Problem
 
@@ -66,7 +66,7 @@ The web command center (`frontend/frontend.html`) visualizes:
 
 ## Why It Matters
 
-LifeOS v2 demonstrates a practical “Personal AI Agent Operating System” pattern:
+AetherMind demonstrates a practical “Personal AI Agent Operating System” pattern:
 - environment-grounded reasoning,
 - memory and adaptation under drift,
 - measurable RL improvement,

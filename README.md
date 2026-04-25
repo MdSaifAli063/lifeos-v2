@@ -1,10 +1,10 @@
-# 🧠 LifeOS v2 — AI Agent for Conflict Resolution
+# 🧠 AetherMind — AI Agent for Conflict Resolution
 
 ## 🚀 Overview
-LifeOS v2 is an AI-powered autonomous agent trained using reinforcement learning to handle real-life conflicts such as meeting clashes, personal commitments, and difficult email replies.
+AetherMind is an AI-powered autonomous agent trained using reinforcement learning to handle real-life conflicts such as meeting clashes, personal commitments, and difficult email replies.
 
 ## 🎤 One-Line Strong Pitch
-LifeOS v2 is an emotionally intelligent conflict agent that detects tone, rewrites heated messages calmly, tracks conflict history, and guides both sides toward resolution.
+AetherMind is an emotionally intelligent conflict agent that detects tone, rewrites heated messages calmly, tracks conflict history, and guides both sides toward resolution.
 
 ---
 

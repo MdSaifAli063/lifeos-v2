@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import csv
 from datetime import datetime
 from collections import defaultdict
 
@@ -55,6 +56,80 @@ _tokenizer = None
 _model = None
 _model_load_error = None
 _history = []
+_reward_cache = None
+
+
+def _load_reward_artifacts():
+    """Load reward logs used for judging evidence."""
+    global _reward_cache
+    if _reward_cache is not None:
+        return _reward_cache
+
+    outputs_dir = os.path.join(PROJECT_ROOT, "training_outputs")
+    csv_path = os.path.join(outputs_dir, "reward_log.csv")
+    json_path = os.path.join(outputs_dir, "reward_log.json")
+    rows = []
+
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                for item in data:
+                    if isinstance(item, dict):
+                        rows.append(item)
+        except Exception:
+            rows = []
+
+    if not rows and os.path.exists(csv_path):
+        try:
+            with open(csv_path, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                rows = [dict(r) for r in reader]
+        except Exception:
+            rows = []
+
+    _reward_cache = rows
+    return rows
+
+
+def _reward_summary(rows):
+    if not rows:
+        return {
+            "available": False,
+            "message": "No reward logs found in training_outputs/"
+        }
+
+    rewards = []
+    for row in rows:
+        try:
+            rewards.append(float(row.get("reward", 0)))
+        except Exception:
+            continue
+
+    if not rewards:
+        return {
+            "available": False,
+            "message": "Reward logs found, but reward values are invalid"
+        }
+
+    first = rewards[0]
+    last = rewards[-1]
+    improvement = last - first
+    positive = sum(1 for r in rewards if r >= 0)
+    success_rate = round((positive / len(rewards)) * 100, 2)
+
+    return {
+        "available": True,
+        "points": len(rewards),
+        "first_reward": round(first, 4),
+        "last_reward": round(last, 4),
+        "max_reward": round(max(rewards), 4),
+        "min_reward": round(min(rewards), 4),
+        "avg_reward": round(sum(rewards) / len(rewards), 4),
+        "reward_improvement": round(improvement, 4),
+        "success_probability_pct": success_rate
+    }
 
 
 def get_model():
@@ -1267,6 +1342,92 @@ def health():
             "model_error": _model_load_error
         }
     )
+
+
+@app.route("/favicon.ico")
+def favicon():
+    # Avoid noisy 404s in browser console when no icon is provided.
+    return ("", 204)
+
+
+@app.route("/api/rewards/summary", methods=["GET"])
+def api_rewards_summary():
+    rows = _load_reward_artifacts()
+    summary = _reward_summary(rows)
+    return jsonify(summary)
+
+
+@app.route("/api/rewards/timeline", methods=["GET"])
+def api_rewards_timeline():
+    rows = _load_reward_artifacts()
+    if not rows:
+        return jsonify({"available": False, "timeline": []})
+
+    timeline = []
+    for idx, row in enumerate(rows):
+        try:
+            reward = float(row.get("reward", 0))
+        except Exception:
+            reward = 0.0
+        epoch = row.get("epoch", idx)
+        timeline.append({
+            "epoch": int(epoch) if str(epoch).isdigit() else idx,
+            "reward": reward,
+            "persona": row.get("persona", "unknown"),
+            "policy": row.get("policy", "unknown")
+        })
+
+    return jsonify({
+        "available": True,
+        "points": len(timeline),
+        "timeline": timeline
+    })
+
+
+@app.route("/api/judging/readiness", methods=["GET"])
+def api_judging_readiness():
+    rows = _load_reward_artifacts()
+    reward_data = _reward_summary(rows)
+    readiness = {
+        "openenv_usage": True,
+        "trl_colab_script": True,
+        "reward_evidence_available": bool(reward_data.get("available")),
+        "mini_blog_or_video_published": False,
+        "hf_space_hosted": False
+    }
+    return jsonify({
+        "readiness": readiness,
+        "reward_summary": reward_data,
+        "notes": [
+            "Publish mini-blog or <2 min video link to mark ready.",
+            "Host app on Hugging Face Spaces to complete minimum requirements."
+        ]
+    })
+
+
+@app.route("/api/agent/capabilities", methods=["GET"])
+def api_agent_capabilities():
+    return jsonify({
+        "core_modules": [
+            "Conflict Resolution Agent",
+            "Calendar Agent",
+            "Negotiation Agent",
+            "Email Reply Agent",
+            "Delegation Agent",
+            "Memory Agent",
+            "Emotion Detection Agent"
+        ],
+        "advanced_features": [
+            "Emotion detection module",
+            "Response rewriter",
+            "Mediation mode",
+            "Conflict progress dashboard",
+            "Conflict history memory",
+            "Predictive conflict handling",
+            "Schema drift adaptation",
+            "Consumer workflow automation"
+        ]
+    })
 
 
 # ----------------------------------

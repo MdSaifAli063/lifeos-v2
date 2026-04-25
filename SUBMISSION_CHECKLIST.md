@@ -13,9 +13,11 @@ Use this as your final pre-submission checklist.
   - Colab-friendly minimal script: `training/train_ppo_colab.py`
 
 - [ ] **Mini-blog on Hugging Face OR <2 min YouTube mini-video**
-  - Add link here: `<PASTE_LINK>`
+  - Draft prepared: `MINI_BLOG_DRAFT.md`
+  - Add published link here: `<PASTE_LINK>`
 
 - [ ] **OpenEnv environment hosted on Hugging Face Spaces**
+  - Deployment guide: `HF_SPACES_DEPLOY.md`
   - Add Space URL here: `<PASTE_SPACE_URL>`
 
 ## First-Round Judging Alignment

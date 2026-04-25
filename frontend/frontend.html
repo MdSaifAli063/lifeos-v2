@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeOS v2 Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
             --bg-0: #070c24;
@@ -910,7 +909,7 @@
     <div class="app-shell">
         <aside class="sidebar">
             <div class="brand">
-                <div class="brand-mark"><i class="bi bi-braces-asterisk"></i></div>
+                <div class="brand-mark">◎</div>
                 <div>
                     <h1>LifeOS v2</h1>
                     <p>Personal Conflict Resolution Agent</p>
@@ -918,46 +917,18 @@
             </div>
 
             <div class="menu">
-                <button class="menu-btn active" data-page="dashboard"><span class="menu-ico"><i class="bi bi-grid-1x2-fill"></i></span>Dashboard</button>
-                <button class="menu-btn" data-page="resolver"><span class="menu-ico"><i class="bi bi-diagram-3"></i></span>Conflict Resolver</button>
-                <button class="menu-btn" data-page="emotion"><span class="menu-ico"><i class="bi bi-emoji-smile"></i></span>Emotion Detection</button>
-                <button class="menu-btn" data-page="rewriter"><span class="menu-ico"><i class="bi bi-pencil-square"></i></span>Response Rewriter</button>
-                <button class="menu-btn" data-page="mediation"><span class="menu-ico"><i class="bi bi-people"></i></span>Mediation Mode</button>
-                <button class="menu-btn" data-page="history"><span class="menu-ico"><i class="bi bi-clock-history"></i></span>Conflict History</button>
+                <button class="menu-btn active" data-page="dashboard"><span class="menu-ico">▦</span>Dashboard</button>
+                <button class="menu-btn" data-page="resolver"><span class="menu-ico">⚯</span>Conflict Resolver</button>
+                <button class="menu-btn" data-page="emotion"><span class="menu-ico">◉</span>Emotion Detection</button>
+                <button class="menu-btn" data-page="rewriter"><span class="menu-ico">✎</span>Response Rewriter</button>
+                <button class="menu-btn" data-page="mediation"><span class="menu-ico">⎇</span>Mediation Mode</button>
+                <button class="menu-btn" data-page="history"><span class="menu-ico">◷</span>Conflict History</button>
             </div>
             <div class="menu-divider"></div>
-
-            <div class="profile-card">
-                <div class="avatar">SA</div>
-                <div>
-                    <div class="profile-sub">Good Evening,</div>
-                    <div class="profile-name">Saif Ali</div>
-                </div>
-            </div>
-
-            <div class="mode-card">
-                <span><i class="bi bi-gem"></i> &nbsp; Executive Mode</span>
-                <span>&rsaquo;</span>
-            </div>
-
-            <div class="promo-card">
-                <span class="promo-copy">Focus on what matters,<br>LifeOS handles the rest.</span>
-                <span class="promo-twinkle left"><i class="bi bi-stars"></i></span>
-                <span class="promo-twinkle right"><i class="bi bi-stars"></i></span>
-            </div>
-
-            <div class="upgrade-card">
-                <span><i class="bi bi-lightning-charge"></i> &nbsp; Upgrade to Pro</span>
-                <span>&rsaquo;</span>
-            </div>
         </aside>
 
         <main class="main">
             <div class="topbar">
-                <div class="title">
-                    <h2 id="pageTitle">Good Evening, Saif Ali 👋</h2>
-                    <p id="pageSubtitle">I am here to help you resolve conflicts, manage tasks and optimize your day.</p>
-                </div>
                 <div class="status-row">
                     <div class="chip">
                         <div class="chip-label">Agent Status</div>
@@ -1008,23 +979,23 @@
                             <div class="ring-core"></div>
 
                             <div class="agent-node node-cal">
-                                <span class="node-icon node-calendar"><i class="bi bi-calendar3"></i></span>
+                                <span class="node-icon node-calendar">◷</span>
                                 <div><b>Calendar Agent</b><small id="node-cal-status">Checking availability</small></div>
                             </div>
                             <div class="agent-node node-del">
-                                <span class="node-icon node-delegation"><i class="bi bi-people"></i></span>
+                                <span class="node-icon node-delegation">⎇</span>
                                 <div><b>Delegation Agent</b><small id="node-del-status">Finding best options</small></div>
                             </div>
                             <div class="agent-node node-con">
-                                <span class="node-icon node-conflict"><i class="bi bi-shield-check"></i></span>
+                                <span class="node-icon node-conflict">◇</span>
                                 <div><b>Conflict Analyzer</b><small id="node-con-status">Evaluating impact</small></div>
                             </div>
                             <div class="agent-node node-em">
-                                <span class="node-icon node-email"><i class="bi bi-envelope"></i></span>
+                                <span class="node-icon node-email">✉</span>
                                 <div><b>Email Agent</b><small id="node-em-status">Drafting response</small></div>
                             </div>
                             <div class="agent-node node-mem">
-                                <span class="node-icon node-memory"><i class="bi bi-database"></i></span>
+                                <span class="node-icon node-memory">◎</span>
                                 <div><b>Memory Agent</b><small id="node-mem-status">Recalling preferences</small></div>
                             </div>
                             <div class="brain-core">🧠</div>
@@ -1041,17 +1012,17 @@
 
                 <div class="right-col">
                     <article class="card">
-                        <div class="title-row"><h3>Today's Schedule</h3><span class="card-link">View Calendar</span></div>
-                        <div class="list">
-                            <div class="row"><span>10:00 AM</span><span>Team Stand-up</span></div>
-                            <div class="row"><span>01:30 PM</span><span>Client Call</span></div>
-                            <div class="row"><span>04:00 PM</span><span>Project Review</span></div>
-                            <div class="row warning"><span>07:00 PM</span><span>Conflict Detected<br><small>Investor meeting / Birthday dinner</small></span></div>
+                        <div class="title-row"><h3>Live Scenario Snapshot</h3></div>
+                        <div id="scheduleList" class="list">
+                            <div class="row"><span>Scenario</span><span>Waiting for first episode...</span></div>
+                            <div class="row"><span>Priority</span><span>N/A</span></div>
+                            <div class="row"><span>Policy</span><span>N/A</span></div>
+                            <div class="row"><span>Reward</span><span>N/A</span></div>
                         </div>
                     </article>
 
                     <article class="card">
-                        <div class="title-row"><h3>Memory & Preferences</h3><span class="card-link">View All</span></div>
+                        <div class="title-row"><h3>Memory & Preferences</h3></div>
                         <div id="memoryList" class="list">
                             <div class="row"><span>Prefers family over work (Unless urgent)</span></div>
                             <div class="row"><span>Dislikes late night meetings</span></div>
@@ -1063,25 +1034,24 @@
                     <article class="card">
                         <h3>Quick Actions</h3>
                         <div class="quick-grid">
-                            <button class="quick-btn" id="emailAction"><span>✉</span>Email Assistant</button>
-                            <button class="quick-btn" id="delegateAction"><span>⎇</span>Delegation Hub</button>
-                            <button class="quick-btn" id="emotionAction"><span>⊕</span>Add Task</button>
-                            <button class="quick-btn" id="episodeAction"><span>📅</span>Schedule Planner</button>
+                            <button class="quick-btn" id="emailAction"><span>✉</span>Response Rewriter</button>
+                            <button class="quick-btn" id="delegateAction"><span>⎇</span>Mediation Mode</button>
+                            <button class="quick-btn" id="emotionAction"><span>◎</span>Emotion Detection</button>
+                            <button class="quick-btn" id="episodeAction"><span>◉</span>Run Episode</button>
                         </div>
                         <div id="quickOutput" class="output-area compact">Action results will appear here.</div>
                     </article>
 
-                    <article class="card promo-pro">
-                        <h3>LifeOS Pro</h3>
-                        <p class="card-note">Unlock advanced features, deep memory and smarter agents.</p>
-                        <button class="btn-outline">Upgrade Now</button>
+                    <article class="card">
+                        <h3>Tool Use & Action Queue</h3>
+                        <div id="toolQueuePanel" class="output-area compact">Waiting for episode execution...</div>
                     </article>
                 </div>
             </section>
 
             <section class="grid-bottom">
                 <article class="card">
-                    <div class="title-row"><h3>Agent Capabilities</h3><span class="card-link">Learn More</span></div>
+                    <div class="title-row"><h3>Agent Capabilities</h3></div>
                     <div class="cap-item"><i class="dot-icon"></i><div><span>Conflict Resolution</span>Resolve complex scheduling conflicts</div></div>
                     <div class="cap-item"><i class="dot-icon"></i><div><span>Smart Delegation</span>Find and assign the right person</div></div>
                     <div class="cap-item"><i class="dot-icon"></i><div><span>Email Generation</span>Context-aware email drafting</div></div>
@@ -1090,7 +1060,7 @@
                 </article>
 
                 <article class="card">
-                    <div class="title-row"><h3>Recent Resolutions</h3><span class="card-link">View All</span></div>
+                    <div class="title-row"><h3>Recent Resolutions</h3></div>
                     <div id="resolutionList" class="resolution-list">
                         <div class="res-item"><span class="check">✓</span><span>No resolutions yet. Run a conflict or episode.</span><span class="pill">Ready</span><span>now</span></div>
                     </div>
@@ -1226,7 +1196,7 @@
     </div>
 
     <script>
-        const API_BASE = "http://localhost:5000";
+        const API_BASE = window.location.origin || "http://localhost:5000";
         const engineLines = [
             "Evaluating priorities, dependencies and outcomes...",
             "Running planner and predictor on current scenario...",
@@ -1238,7 +1208,7 @@
         const pageMeta = {
             dashboard: {
                 title: "Good Evening, Saif Ali 👋",
-                subtitle: "I am here to help you resolve conflicts, manage tasks and optimize your day."
+                subtitle: "I operate as your autonomous conflict-resolution agent to plan, reason, and act across your day."
             },
             resolver: {
                 title: "Executive Resolver",
@@ -1280,10 +1250,6 @@
             document.querySelectorAll(".menu-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.page === pageName);
             });
-
-            const meta = pageMeta[pageName] || pageMeta.dashboard;
-            document.getElementById("pageTitle").textContent = meta.title;
-            document.getElementById("pageSubtitle").textContent = meta.subtitle;
         }
 
         async function checkHealth() {
@@ -1342,6 +1308,28 @@
                     tools.rewrite ? "Rewrite tool activated" : "Drafting response";
                 document.getElementById("node-mem-status").textContent =
                     data.persona?.name ? `Persona: ${data.persona.name}` : "Recalling preferences";
+
+                const scenarioTitle = data.scenario?.title || data.scenario?.name || "Conflict scenario";
+                const priority = data.scenario?.priority || data.scenario?.priority_focus || "N/A";
+                const policy = data.policy?.version || "stable";
+                const rewardText = data.total_reward !== undefined ? String(data.total_reward) : "N/A";
+                document.getElementById("scheduleList").innerHTML = `
+                    <div class="row"><span>Scenario</span><span>${scenarioTitle}</span></div>
+                    <div class="row"><span>Priority</span><span>${priority}</span></div>
+                    <div class="row"><span>Policy</span><span>${policy}</span></div>
+                    <div class="row ${Number(data.total_reward || 0) < 0 ? "warning" : ""}"><span>Reward</span><span>${rewardText}</span></div>
+                `;
+
+                const workflowQueue = Array.isArray(data.workflow) ? data.workflow : [];
+                const delegationQueue = data.delegation || {};
+                const toolNames = Object.keys(tools);
+                const queueText = [
+                    `Tools used: ${toolNames.length ? toolNames.join(", ") : "none"}`,
+                    `Delegated actions: ${Object.keys(delegationQueue).length}`,
+                    `Planning stack steps: ${workflowQueue.length}`,
+                    `Execution queue: ${workflowQueue.length ? "active" : "idle"}`
+                ].join("\n");
+                setOutput("toolQueuePanel", queueText);
             } catch (err) {
                 // keep defaults
             }

@@ -7,6 +7,11 @@ class SchemaManager:
             ["taskA", "taskB", "importance", "message"],
             ["activity_x", "activity_y", "focus", "note"]
         ]
+        self.policy_versions = [
+            {"version": "v1", "hard_limit": "none", "quiet_hours": False},
+            {"version": "v2", "hard_limit": "no work meetings after 8 PM", "quiet_hours": True},
+            {"version": "v3", "hard_limit": "family event cannot be auto-cancelled", "quiet_hours": True}
+        ]
 
     def get_schema(self):
         return random.choice(self.schemas)
@@ -19,3 +24,6 @@ class SchemaManager:
         mapped = dict(zip(keys, values))
 
         return mapped
+
+    def policy_drift_event(self):
+        return random.choice(self.policy_versions)

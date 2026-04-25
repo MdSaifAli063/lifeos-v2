@@ -1,50 +1,90 @@
 [
   {
     "epoch": 0,
-    "reward": -10.0,
+    "reward": 8.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Startup Founder",
+    "policy": "v1",
+    "priority_alignment": 0,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 1,
-    "reward": -10.0,
+    "reward": 39.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Startup Founder",
+    "policy": "v2",
+    "priority_alignment": 0,
+    "policy_compliance": 6,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 2,
-    "reward": -10.0,
+    "reward": 8.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Startup Founder",
+    "policy": "v3",
+    "priority_alignment": 0,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 3,
-    "reward": -10.0,
+    "reward": 23.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Executive Parent",
+    "policy": "v2",
+    "priority_alignment": 15,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 4,
-    "reward": -10.0,
+    "reward": 8.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Balanced Professional",
+    "policy": "v2",
+    "priority_alignment": 0,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 5,
-    "reward": -10.0,
+    "reward": 8.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Balanced Professional",
+    "policy": "v1",
+    "priority_alignment": 0,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 6,
-    "reward": -10.0,
+    "reward": 33.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Balanced Professional",
+    "policy": "v1",
+    "priority_alignment": 0,
+    "policy_compliance": 0,
+    "tool_execution_bonus": 8
   },
   {
     "epoch": 7,
-    "reward": 25.0,
+    "reward": 39.0,
     "mode": "fast",
-    "model": "google/flan-t5-small"
+    "model": "google/flan-t5-small",
+    "persona": "Startup Founder",
+    "policy": "v3",
+    "priority_alignment": 0,
+    "policy_compliance": 6,
+    "tool_execution_bonus": 8
   }
 ]

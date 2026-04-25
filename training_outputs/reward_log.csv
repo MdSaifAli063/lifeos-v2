@@ -1,9 +1,9 @@
-epoch,reward,mode,model
-0,-10.0,fast,google/flan-t5-small
-1,-10.0,fast,google/flan-t5-small
-2,-10.0,fast,google/flan-t5-small
-3,-10.0,fast,google/flan-t5-small
-4,-10.0,fast,google/flan-t5-small
-5,-10.0,fast,google/flan-t5-small
-6,-10.0,fast,google/flan-t5-small
-7,25.0,fast,google/flan-t5-small
+epoch,reward,mode,model,persona,policy,priority_alignment,policy_compliance,tool_execution_bonus
+0,8.0,fast,google/flan-t5-small,Startup Founder,v1,0,0,8
+1,39.0,fast,google/flan-t5-small,Startup Founder,v2,0,6,8
+2,8.0,fast,google/flan-t5-small,Startup Founder,v3,0,0,8
+3,23.0,fast,google/flan-t5-small,Executive Parent,v2,15,0,8
+4,8.0,fast,google/flan-t5-small,Balanced Professional,v2,0,0,8
+5,8.0,fast,google/flan-t5-small,Balanced Professional,v1,0,0,8
+6,33.0,fast,google/flan-t5-small,Balanced Professional,v1,0,0,8
+7,39.0,fast,google/flan-t5-small,Startup Founder,v3,0,6,8

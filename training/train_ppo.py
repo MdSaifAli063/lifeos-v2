@@ -180,7 +180,7 @@ for epoch in range(total_epochs):
         # -----------------------------------------
         # Reward
         # -----------------------------------------
-        _, reward, _, _ = env.step(
+        _, reward, _, info = env.step(
             generated_text
         )
 
@@ -234,7 +234,12 @@ for epoch in range(total_epochs):
                 "epoch": epoch,
                 "reward": float(reward),
                 "mode": args.mode,
-                "model": model_name
+                "model": model_name,
+                "persona": info.get("persona", {}).get("name", "unknown"),
+                "policy": info.get("policy", {}).get("version", "unknown"),
+                "priority_alignment": info.get("reward_breakdown", {}).get("priority_alignment", 0),
+                "policy_compliance": info.get("reward_breakdown", {}).get("policy_compliance", 0),
+                "tool_execution_bonus": info.get("reward_breakdown", {}).get("tool_execution_bonus", 0)
             }
         )
 
@@ -249,7 +254,20 @@ for epoch in range(total_epochs):
 if reward_history:
     csv_path = os.path.join(args.output_dir, "reward_log.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["epoch", "reward", "mode", "model"])
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "epoch",
+                "reward",
+                "mode",
+                "model",
+                "persona",
+                "policy",
+                "priority_alignment",
+                "policy_compliance",
+                "tool_execution_bonus"
+            ]
+        )
         writer.writeheader()
         writer.writerows(reward_history)
 

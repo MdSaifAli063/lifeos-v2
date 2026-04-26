@@ -1,3 +1,13 @@
+---
+title: AetherMind
+emoji: "🧠"
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_file: app/app.py
+pinned: false
+---
+
 # 🧠 AetherMind — AI Agent for Conflict Resolution
 
 ## 🚀 Overview

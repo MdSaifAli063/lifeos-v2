@@ -39,7 +39,7 @@ def parse_args():
         "--mode",
         choices=["fast", "default"],
         default="fast",
-        help="fast uses flan-t5-small; default uses flan-t5-base",
+        help="fast vs default only changes schedule; both use google/flan-t5-large (app default)",
     )
     parser.add_argument(
         "--output_dir",
@@ -52,13 +52,13 @@ def parse_args():
 def get_mode_config(mode):
     if mode == "default":
         return {
-            "model_name": "google/flan-t5-base",
+            "model_name": "google/flan-t5-large",
             "learning_rate": 1e-6,
             "ppo_epochs": 2,
             "max_new_tokens": 60,
         }
     return {
-        "model_name": "google/flan-t5-small",
+        "model_name": "google/flan-t5-large",
         "learning_rate": 2e-6,
         "ppo_epochs": 1,
         "max_new_tokens": 40,

@@ -47,6 +47,11 @@ parser.add_argument(
     default="training_outputs",
     help="Directory for reward logs and training artifacts"
 )
+parser.add_argument(
+    "--fallback_model",
+    default="google/flan-t5-base",
+    help="Fallback checkpoint if primary model cannot load due memory/pagefile limits"
+)
 args = parser.parse_args()
 
 
@@ -61,37 +66,59 @@ os.makedirs(args.output_dir, exist_ok=True)
 
 
 # -------------------------------------------------
-# Model
+# Model (all modes: google/flan-t5-large — same family as app LIFEOS_MODEL_NAME default)
+# Modes differ by epochs / tokens / LR, not checkpoint size.
 # -------------------------------------------------
 if args.mode == "fast":
-    model_name = "google/flan-t5-small"
+    model_name = "google/flan-t5-large"
     total_epochs = 8
     max_new_tokens = 40
     learning_rate = 2e-6
     ppo_epochs = 1
 elif args.mode == "high":
-    model_name = "google/flan-t5-base"
+    model_name = "google/flan-t5-large"
     total_epochs = 80
     max_new_tokens = 80
     learning_rate = 8e-7
     ppo_epochs = 3
 else:
-    model_name = "google/flan-t5-base"
+    model_name = "google/flan-t5-large"
     total_epochs = 50
     max_new_tokens = 60
     learning_rate = 1e-6
     ppo_epochs = 2
 
-tokenizer = AutoTokenizer.from_pretrained(
-    model_name
-)
+def _is_windows_pagefile_error(err: Exception) -> bool:
+    msg = str(err).lower()
+    return (
+        "os error 1455" in msg
+        or "paging file is too small" in msg
+        or "not enough memory" in msg
+    )
 
-model = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(
-    model_name
-)
 
-ref_model = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(
-    model_name
+def _load_ppo_models(primary_model_name: str, fallback_model_name: str):
+    """Load tokenizer/model/ref_model; fallback automatically on Windows memory errors."""
+    try:
+        tok = AutoTokenizer.from_pretrained(primary_model_name)
+        mdl = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(primary_model_name)
+        ref = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(primary_model_name)
+        return primary_model_name, tok, mdl, ref
+    except Exception as e:
+        if primary_model_name == fallback_model_name or not _is_windows_pagefile_error(e):
+            raise
+        print("\n[WARN] Could not load primary model due memory/pagefile limits.")
+        print(f"[WARN] Primary: {primary_model_name}")
+        print(f"[WARN] Falling back to: {fallback_model_name}\n")
+        tok = AutoTokenizer.from_pretrained(fallback_model_name)
+        mdl = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(fallback_model_name)
+        ref = AutoModelForSeq2SeqLMWithValueHead.from_pretrained(fallback_model_name)
+        return fallback_model_name, tok, mdl, ref
+
+
+model_name, tokenizer, model, ref_model = _load_ppo_models(
+    model_name,
+    args.fallback_model
 )
 
 

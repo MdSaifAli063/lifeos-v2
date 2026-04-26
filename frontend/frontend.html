@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,31 +81,36 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 6px 8px 12px;
-            border-bottom: 1px solid rgba(105, 122, 186, 0.2);
+            gap: 12px;
+            padding: 12px 14px 14px;
+            border-bottom: 1.5px solid rgba(46, 203, 255, 0.25);
+            margin-bottom: 6px;
         }
 
         .brand h1 {
-            font-size: 33px;
-            font-weight: 600;
-            letter-spacing: 0;
-            line-height: 1.05;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            color: #2ecbff;
         }
 
         .brand-brain {
-            color: #2ecbff;
-            text-shadow: 0 0 10px rgba(46, 203, 255, 0.5);
-            font-size: 24px;
+            color: #ff6bb6;
+            text-shadow: 0 0 16px rgba(255, 107, 182, 0.8);
+            font-size: 32px;
+            -webkit-text-fill-color: unset;
         }
 
         .brand p {
-            color: #8f9cca;
-            font-size: 10.5px;
+            color: #9fb0e8;
+            font-size: 11px;
             margin-top: 2px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .menu {
@@ -113,42 +119,44 @@
         }
 
         .menu-btn {
-            border: 1px solid transparent;
+            border: 1.2px solid transparent;
             background: transparent;
             color: #d7ddff;
-            border-radius: 11px;
-            padding: 11px 12px;
+            border-radius: 12px;
+            padding: 12px 14px;
             cursor: pointer;
             text-align: left;
             font-size: 14.5px;
             font-weight: 600;
-            transition: 0.22s ease;
+            transition: all 0.22s ease;
             display: flex;
             align-items: center;
             gap: 10px;
             line-height: 1.1;
+            position: relative;
         }
 
         .menu-ico {
             width: 20px;
             text-align: center;
             opacity: 0.95;
-            font-size: 15px;
+            font-size: 16px;
             color: #d8e0ff;
         }
 
         .menu-btn:hover {
-            border-color: rgba(123, 77, 255, 0.35);
-            background: rgba(123, 77, 255, 0.12);
+            border-color: rgba(123, 77, 255, 0.4);
+            background: rgba(123, 77, 255, 0.15);
             color: var(--text-1);
-            transform: translateX(2px);
+            transform: translateX(3px);
         }
 
         .menu-btn.active {
             color: #f4edff;
-            background: linear-gradient(90deg, #6736ff 0%, #4c2bdd 100%);
-            border-color: rgba(156, 128, 255, 0.52);
-            box-shadow: 0 8px 15px rgba(68, 34, 182, 0.3);
+            background: linear-gradient(135deg, rgba(109, 55, 255, 0.95), rgba(76, 43, 221, 0.9));
+            border-color: rgba(200, 160, 255, 0.65);
+            box-shadow: 0 8px 20px rgba(109, 59, 255, 0.35), inset 0 0 0 1px rgba(156, 166, 255, 0.1);
+            position: relative;
         }
 
         .profile-card,
@@ -332,32 +340,39 @@
         }
 
         .chip {
-            background: var(--card-soft);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 11px 13px;
-            width: 160px;
-            min-height: 68px;
+            background: linear-gradient(135deg, rgba(16, 30, 60, 0.8), rgba(20, 35, 70, 0.6));
+            border: 1.5px solid rgba(116, 160, 255, 0.35);
+            border-radius: 12px;
+            padding: 14px 16px;
+            width: 180px;
+            min-height: 72px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .chip:hover {
-            border-color: rgba(116, 168, 255, 0.42);
-            box-shadow: 0 0 0 1px rgba(116, 168, 255, 0.12), 0 8px 18px rgba(8, 15, 42, 0.35);
+            border-color: rgba(116, 168, 255, 0.55);
+            box-shadow: 0 8px 24px rgba(116, 168, 255, 0.15), 0 0 1px rgba(116, 168, 255, 0.2);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(16, 35, 75, 0.9), rgba(25, 45, 85, 0.8));
         }
 
         .chip-label {
-            font-size: 12px;
-            color: #b9c4ef;
-            margin-bottom: 4px;
+            font-size: 11px;
+            color: #9fb0e8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
 
         .chip-value {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
+            color: #f3f6ff;
         }
 
         .chip-about {
@@ -391,19 +406,20 @@
         }
 
         .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 11px;
-            padding: 13px;
-            box-shadow: inset 0 0 0 1px rgba(156, 166, 255, 0.04);
-            backdrop-filter: blur(4px);
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            background: linear-gradient(135deg, rgba(16, 22, 52, 0.95), rgba(14, 20, 50, 0.88));
+            border: 1.5px solid rgba(116, 160, 255, 0.28);
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(156, 166, 255, 0.06);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(130, 156, 255, 0.36);
-            box-shadow: inset 0 0 0 1px rgba(156, 166, 255, 0.07), 0 10px 24px rgba(8, 12, 32, 0.35);
+            transform: translateY(-3px);
+            border-color: rgba(130, 156, 255, 0.45);
+            box-shadow: 0 12px 32px rgba(116, 168, 255, 0.15), inset 0 0 0 1px rgba(156, 166, 255, 0.1);
+            background: linear-gradient(135deg, rgba(20, 28, 60, 0.98), rgba(18, 24, 55, 0.95));
         }
 
         .resolve-card {
@@ -415,76 +431,117 @@
         #resolveOutput {
             flex: 1;
             max-height: none;
-            min-height: 180px;
+            min-height: 200px;
         }
 
         .card h3 {
-            font-size: 18px;
-            margin-bottom: 6px;
+            font-size: 20px;
+            margin-bottom: 8px;
             color: #f2f5ff;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f3f6ff 0%, #9fb0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .card-note {
-            color: #b7c2ee;
+            color: #9fb0e8;
             font-size: 13px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            line-height: 1.4;
         }
 
         .field {
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .field label {
             font-size: 12px;
-            color: #c6d0f8;
+            color: #d0d8ff;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .field input,
         .field textarea,
         .field select {
             width: 100%;
-            border: 1px solid rgba(123, 146, 255, 0.24);
-            background: rgba(9, 13, 33, 0.95);
-            border-radius: 9px;
+            border: 1.5px solid rgba(116, 160, 255, 0.3);
+            background: linear-gradient(135deg, rgba(8, 12, 32, 0.88), rgba(10, 15, 38, 0.85));
+            border-radius: 10px;
             color: var(--text-1);
-            padding: 11px;
+            padding: 12px 14px;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .field input:hover,
+        .field textarea:hover,
+        .field select:hover {
+            border-color: rgba(116, 160, 255, 0.45);
+            background: linear-gradient(135deg, rgba(10, 15, 36, 0.92), rgba(12, 18, 42, 0.9));
         }
 
         .field input:focus,
         .field textarea:focus,
         .field select:focus {
-            border-color: rgba(112, 165, 255, 0.55);
-            box-shadow: 0 0 0 2px rgba(112, 165, 255, 0.16);
+            border-color: rgba(112, 165, 255, 0.7);
+            box-shadow: 0 0 0 3px rgba(112, 165, 255, 0.12), 0 0 12px rgba(112, 165, 255, 0.2);
+            background: linear-gradient(135deg, rgba(12, 18, 42, 0.95), rgba(14, 22, 48, 0.95));
         }
 
         .field textarea {
-            min-height: 70px;
+            min-height: 90px;
             resize: vertical;
         }
 
         .btn-primary {
-            border: 1px solid rgba(181, 61, 255, 0.55);
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--violet), var(--violet-2));
-            color: white;
+            border: 1.5px solid rgba(181, 61, 255, 0.65);
+            border-radius: 11px;
+            background: linear-gradient(135deg, var(--violet), var(--violet-2));
+            color: #f9f5ff;
             font-size: 14px;
-            font-weight: 600;
-            padding: 11px 13px;
+            font-weight: 700;
+            padding: 13px 16px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 10px 22px rgba(98, 62, 255, 0.28);
-            transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+            box-shadow: 0 8px 20px rgba(109, 59, 255, 0.35), 0 0 20px rgba(109, 59, 255, 0.2);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            filter: brightness(1.06);
-            transform: translateY(-1px);
-            box-shadow: 0 12px 24px rgba(98, 62, 255, 0.36);
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(109, 59, 255, 0.45), 0 0 28px rgba(109, 59, 255, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .reasoning-wrap {
@@ -499,12 +556,14 @@
             position: relative;
             display: grid;
             place-items: center;
-            min-height: 322px;
-            border-radius: 14px;
+            min-height: 360px;
+            border-radius: 16px;
             background:
-                radial-gradient(circle at center, rgba(47, 132, 255, 0.22), rgba(19, 27, 62, 0.2) 46%, transparent 72%);
+                radial-gradient(circle at center, rgba(80, 150, 255, 0.3), rgba(19, 27, 62, 0.2) 50%, transparent 75%);
             overflow: hidden;
             perspective: 800px;
+            border: 1.5px solid rgba(116, 160, 255, 0.25);
+            box-shadow: 0 8px 24px rgba(109, 59, 255, 0.15), inset 0 0 20px rgba(80, 150, 255, 0.08);
         }
 
         .agent-ring::before,
@@ -564,15 +623,15 @@
         }
 
         .brain-core {
-            width: 148px;
-            height: 148px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             background:
-                radial-gradient(circle at 32% 30%, rgba(48, 212, 255, 0.8), rgba(87, 78, 255, 0.68) 48%, rgba(181, 61, 255, 0.42));
-            box-shadow: 0 0 34px rgba(31, 200, 255, 0.35), inset 0 -12px 24px rgba(14, 20, 54, 0.35);
+                radial-gradient(circle at 32% 30%, rgba(48, 212, 255, 0.95), rgba(87, 78, 255, 0.75) 50%, rgba(181, 61, 255, 0.5));
+            box-shadow: 0 0 40px rgba(31, 200, 255, 0.45), 0 0 60px rgba(109, 59, 255, 0.3), inset 0 -12px 24px rgba(14, 20, 54, 0.4);
             display: grid;
             place-items: center;
-            font-size: 62px;
+            font-size: 68px;
             z-index: 5;
             transform: translateZ(12px);
             animation: float-brain 3.8s ease-in-out infinite;
@@ -580,47 +639,91 @@
 
         .neural-spark {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: #9fdcff;
-            box-shadow: 0 0 9px rgba(159, 220, 255, 0.9);
+            background: #c0e8ff;
+            box-shadow: 0 0 12px rgba(192, 232, 255, 1), 0 0 24px rgba(109, 59, 255, 0.6);
             z-index: 3;
-            opacity: 0.7;
+            opacity: 0.85;
             animation: spark-float 4.5s linear infinite;
         }
 
-        .spark-1 { left: 24%; top: 18%; animation-delay: 0.2s; }
-        .spark-2 { left: 38%; top: 8%; animation-delay: 0.8s; }
-        .spark-3 { left: 62%; top: 10%; animation-delay: 1.3s; }
-        .spark-4 { right: 20%; top: 20%; animation-delay: 1.8s; }
-        .spark-5 { left: 14%; top: 46%; animation-delay: 2.2s; }
-        .spark-6 { right: 12%; top: 48%; animation-delay: 2.8s; }
-        .spark-7 { left: 20%; bottom: 22%; animation-delay: 3.2s; }
-        .spark-8 { right: 18%; bottom: 18%; animation-delay: 3.7s; }
-        .spark-9 { left: 50%; bottom: 10%; animation-delay: 4.1s; }
+        .spark-1 {
+            left: 24%;
+            top: 18%;
+            animation-delay: 0.2s;
+        }
+
+        .spark-2 {
+            left: 38%;
+            top: 8%;
+            animation-delay: 0.8s;
+        }
+
+        .spark-3 {
+            left: 62%;
+            top: 10%;
+            animation-delay: 1.3s;
+        }
+
+        .spark-4 {
+            right: 20%;
+            top: 20%;
+            animation-delay: 1.8s;
+        }
+
+        .spark-5 {
+            left: 14%;
+            top: 46%;
+            animation-delay: 2.2s;
+        }
+
+        .spark-6 {
+            right: 12%;
+            top: 48%;
+            animation-delay: 2.8s;
+        }
+
+        .spark-7 {
+            left: 20%;
+            bottom: 22%;
+            animation-delay: 3.2s;
+        }
+
+        .spark-8 {
+            right: 18%;
+            bottom: 18%;
+            animation-delay: 3.7s;
+        }
+
+        .spark-9 {
+            left: 50%;
+            bottom: 10%;
+            animation-delay: 4.1s;
+        }
 
         .agent-node {
             position: absolute;
             display: flex;
             align-items: flex-start;
-            gap: 8px;
-            width: 132px;
-            font-size: 11px;
-            color: var(--text-2);
+            gap: 9px;
+            width: 140px;
+            font-size: 12px;
+            color: #b8c5f0;
             z-index: 6;
             animation: node-pulse 2.8s ease-in-out infinite;
         }
 
         .connector {
             position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(112, 170, 255, 0.15), rgba(112, 170, 255, 0.85), rgba(112, 170, 255, 0.12));
-            box-shadow: 0 0 10px rgba(92, 162, 255, 0.35);
+            height: 2.5px;
+            background: linear-gradient(90deg, rgba(116, 175, 255, 0.25), rgba(116, 175, 255, 0.95), rgba(116, 175, 255, 0.25));
+            box-shadow: 0 0 12px rgba(116, 175, 255, 0.5);
             border-radius: 999px;
             transform-origin: left center;
             z-index: 4;
-            opacity: 0.9;
+            opacity: 0.95;
             animation: connector-flow 2.4s ease-in-out infinite;
             overflow: visible;
         }
@@ -630,38 +733,82 @@
             position: absolute;
             top: 50%;
             left: -8px;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             transform: translateY(-50%);
-            background: radial-gradient(circle at 35% 35%, #c9f2ff 0%, #7fd7ff 42%, rgba(127, 215, 255, 0.1) 100%);
-            box-shadow: 0 0 10px rgba(127, 215, 255, 0.95), 0 0 18px rgba(98, 166, 255, 0.45);
+            background: radial-gradient(circle at 35% 35%, #d0f5ff 0%, #7fd7ff 45%, rgba(127, 215, 255, 0.1) 100%);
+            box-shadow: 0 0 12px rgba(127, 215, 255, 1), 0 0 20px rgba(116, 175, 255, 0.6);
             animation: particle-travel 2s linear infinite;
         }
 
         .node-icon {
-            width: 26px;
-            height: 26px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: grid;
             place-items: center;
-            font-size: 13px;
-            border: 1px solid rgba(136, 155, 241, 0.45);
-            background: rgba(12, 20, 52, 0.9);
-            box-shadow: 0 0 12px rgba(95, 119, 216, 0.25);
+            font-size: 14px;
+            border: 1.5px solid rgba(136, 155, 241, 0.6);
+            background: rgba(12, 20, 52, 0.95);
+            box-shadow: 0 0 14px rgba(136, 155, 241, 0.35);
             flex-shrink: 0;
-            margin-top: 1px;
+            margin-top: 0;
         }
 
-        .node-calendar { color: #3bf3cf; border-color: rgba(47, 239, 193, 0.6); background: rgba(8, 53, 53, 0.85); }
-        .node-delegation { color: #ffb04d; border-color: rgba(255, 169, 77, 0.62); background: rgba(70, 38, 16, 0.85); }
-        .node-conflict { color: #ff6ba6; border-color: rgba(255, 107, 166, 0.58); background: rgba(73, 18, 47, 0.85); }
-        .node-email { color: #bd83ff; border-color: rgba(189, 131, 255, 0.62); background: rgba(50, 23, 73, 0.85); }
-        .node-memory { color: #35d2ff; border-color: rgba(53, 210, 255, 0.62); background: rgba(12, 45, 78, 0.85); }
-        .node-whatif { color: #9ad6ff; border-color: rgba(112, 202, 255, 0.62); background: rgba(18, 41, 76, 0.85); }
-        .node-script-icon { color: #ffd58a; border-color: rgba(255, 213, 138, 0.62); background: rgba(63, 43, 12, 0.85); }
-        .node-ethics { color: #8bffbf; border-color: rgba(139, 255, 191, 0.62); background: rgba(12, 56, 44, 0.85); }
-        .node-feedback { color: #ff9bd4; border-color: rgba(255, 155, 212, 0.62); background: rgba(73, 22, 56, 0.85); }
+        .node-calendar {
+            color: #3bf3cf;
+            border-color: rgba(47, 239, 193, 0.6);
+            background: rgba(8, 53, 53, 0.85);
+        }
+
+        .node-delegation {
+            color: #ffb04d;
+            border-color: rgba(255, 169, 77, 0.62);
+            background: rgba(70, 38, 16, 0.85);
+        }
+
+        .node-conflict {
+            color: #ff6ba6;
+            border-color: rgba(255, 107, 166, 0.58);
+            background: rgba(73, 18, 47, 0.85);
+        }
+
+        .node-email {
+            color: #bd83ff;
+            border-color: rgba(189, 131, 255, 0.62);
+            background: rgba(50, 23, 73, 0.85);
+        }
+
+        .node-memory {
+            color: #35d2ff;
+            border-color: rgba(53, 210, 255, 0.62);
+            background: rgba(12, 45, 78, 0.85);
+        }
+
+        .node-whatif {
+            color: #9ad6ff;
+            border-color: rgba(112, 202, 255, 0.62);
+            background: rgba(18, 41, 76, 0.85);
+        }
+
+        .node-script-icon {
+            color: #ffd58a;
+            border-color: rgba(255, 213, 138, 0.62);
+            background: rgba(63, 43, 12, 0.85);
+        }
+
+        .node-ethics {
+            color: #8bffbf;
+            border-color: rgba(139, 255, 191, 0.62);
+            background: rgba(12, 56, 44, 0.85);
+        }
+
+        .node-feedback {
+            color: #ff9bd4;
+            border-color: rgba(255, 155, 212, 0.62);
+            background: rgba(73, 22, 56, 0.85);
+        }
 
         .agent-node b {
             color: var(--text-1);
@@ -679,60 +826,225 @@
             display: block;
         }
 
-        .node-cal { top: 14px; left: 18px; animation-delay: 0s; }
-        .node-del { top: 14px; right: 18px; animation-delay: 0.2s; }
-        .node-con { top: 102px; left: 2px; animation-delay: 0.4s; }
-        .node-em { top: 118px; right: 2px; animation-delay: 0.6s; }
-        .node-mem { bottom: 12px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; }
-        .node-what { bottom: 88px; left: 16px; animation-delay: 1s; }
-        .node-script { bottom: 112px; right: 16px; animation-delay: 1.2s; }
-        .node-eth { top: 66px; left: 50%; transform: translateX(-50%); animation-delay: 1.4s; }
-        .node-feed { bottom: 58px; left: 50%; transform: translateX(-50%); animation-delay: 1.6s; }
+        .node-cal {
+            top: 14px;
+            left: 18px;
+            animation-delay: 0s;
+        }
 
-        .conn-cal { width: 88px; left: 120px; top: 88px; transform: rotate(24deg); animation-delay: 0.1s; }
-        .conn-del { width: 88px; right: 120px; top: 88px; transform: rotate(-24deg); animation-delay: 0.3s; }
-        .conn-con { width: 96px; left: 108px; top: 150px; transform: rotate(-14deg); animation-delay: 0.5s; }
-        .conn-em { width: 92px; right: 108px; top: 164px; transform: rotate(12deg); animation-delay: 0.7s; }
-        .conn-mem { width: 82px; left: 50%; top: 250px; transform: translateX(-50%) rotate(90deg); animation-delay: 0.9s; }
-        .conn-what { width: 90px; left: 112px; top: 226px; transform: rotate(-35deg); animation-delay: 1.1s; }
-        .conn-script { width: 86px; right: 112px; top: 212px; transform: rotate(30deg); animation-delay: 1.3s; }
-        .conn-eth { width: 68px; left: 50%; top: 108px; transform: translateX(-50%) rotate(90deg); animation-delay: 1.5s; }
-        .conn-feed { width: 66px; left: 50%; top: 220px; transform: translateX(-50%) rotate(90deg); animation-delay: 1.7s; }
-        .conn-cal::after { animation-delay: 0.05s; }
-        .conn-del::after { animation-delay: 0.25s; }
-        .conn-con::after { animation-delay: 0.45s; }
-        .conn-em::after { animation-delay: 0.65s; }
-        .conn-mem::after { animation-delay: 0.85s; }
-        .conn-what::after { animation-delay: 1.05s; }
-        .conn-script::after { animation-delay: 1.25s; }
-        .conn-eth::after { animation-delay: 1.45s; }
-        .conn-feed::after { animation-delay: 1.65s; }
+        .node-del {
+            top: 14px;
+            right: 18px;
+            animation-delay: 0.2s;
+        }
+
+        .node-con {
+            top: 102px;
+            left: 2px;
+            animation-delay: 0.4s;
+        }
+
+        .node-em {
+            top: 118px;
+            right: 2px;
+            animation-delay: 0.6s;
+        }
+
+        .node-mem {
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0.8s;
+        }
+
+        .node-what {
+            bottom: 88px;
+            left: 16px;
+            animation-delay: 1s;
+        }
+
+        .node-script {
+            bottom: 112px;
+            right: 16px;
+            animation-delay: 1.2s;
+        }
+
+        .node-eth {
+            top: 66px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 1.4s;
+        }
+
+        .node-feed {
+            bottom: 58px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 1.6s;
+        }
+
+        .conn-cal {
+            width: 88px;
+            left: 120px;
+            top: 88px;
+            transform: rotate(24deg);
+            animation-delay: 0.1s;
+        }
+
+        .conn-del {
+            width: 88px;
+            right: 120px;
+            top: 88px;
+            transform: rotate(-24deg);
+            animation-delay: 0.3s;
+        }
+
+        .conn-con {
+            width: 96px;
+            left: 108px;
+            top: 150px;
+            transform: rotate(-14deg);
+            animation-delay: 0.5s;
+        }
+
+        .conn-em {
+            width: 92px;
+            right: 108px;
+            top: 164px;
+            transform: rotate(12deg);
+            animation-delay: 0.7s;
+        }
+
+        .conn-mem {
+            width: 82px;
+            left: 50%;
+            top: 250px;
+            transform: translateX(-50%) rotate(90deg);
+            animation-delay: 0.9s;
+        }
+
+        .conn-what {
+            width: 90px;
+            left: 112px;
+            top: 226px;
+            transform: rotate(-35deg);
+            animation-delay: 1.1s;
+        }
+
+        .conn-script {
+            width: 86px;
+            right: 112px;
+            top: 212px;
+            transform: rotate(30deg);
+            animation-delay: 1.3s;
+        }
+
+        .conn-eth {
+            width: 68px;
+            left: 50%;
+            top: 108px;
+            transform: translateX(-50%) rotate(90deg);
+            animation-delay: 1.5s;
+        }
+
+        .conn-feed {
+            width: 66px;
+            left: 50%;
+            top: 220px;
+            transform: translateX(-50%) rotate(90deg);
+            animation-delay: 1.7s;
+        }
+
+        .conn-cal::after {
+            animation-delay: 0.05s;
+        }
+
+        .conn-del::after {
+            animation-delay: 0.25s;
+        }
+
+        .conn-con::after {
+            animation-delay: 0.45s;
+        }
+
+        .conn-em::after {
+            animation-delay: 0.65s;
+        }
+
+        .conn-mem::after {
+            animation-delay: 0.85s;
+        }
+
+        .conn-what::after {
+            animation-delay: 1.05s;
+        }
+
+        .conn-script::after {
+            animation-delay: 1.25s;
+        }
+
+        .conn-eth::after {
+            animation-delay: 1.45s;
+        }
+
+        .conn-feed::after {
+            animation-delay: 1.65s;
+        }
 
         @keyframes spin-ring {
-            from { transform: rotateX(65deg) rotateZ(0deg); }
-            to { transform: rotateX(65deg) rotateZ(360deg); }
+            from {
+                transform: rotateX(65deg) rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateX(65deg) rotateZ(360deg);
+            }
         }
 
         @keyframes spin-ring-reverse {
-            from { transform: rotateX(65deg) rotateZ(360deg); }
-            to { transform: rotateX(65deg) rotateZ(0deg); }
+            from {
+                transform: rotateX(65deg) rotateZ(360deg);
+            }
+
+            to {
+                transform: rotateX(65deg) rotateZ(0deg);
+            }
         }
 
         @keyframes float-brain {
-            0%, 100% { transform: translateZ(12px) translateY(0); }
-            50% { transform: translateZ(22px) translateY(-6px); }
+
+            0%,
+            100% {
+                transform: translateZ(12px) translateY(0);
+            }
+
+            50% {
+                transform: translateZ(22px) translateY(-6px);
+            }
         }
 
         @keyframes node-pulse {
-            0%, 100% { opacity: 0.88; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-3px); }
+
+            0%,
+            100% {
+                opacity: 0.88;
+                transform: translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
         }
 
         @keyframes connector-flow {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.45;
                 filter: brightness(0.95);
             }
+
             50% {
                 opacity: 1;
                 filter: brightness(1.2);
@@ -745,9 +1057,11 @@
                 opacity: 0.15;
                 transform: translateY(-50%) scale(0.7);
             }
+
             20% {
                 opacity: 1;
             }
+
             100% {
                 left: calc(100% - 2px);
                 opacity: 0.2;
@@ -756,54 +1070,102 @@
         }
 
         @keyframes aura-breathe {
-            0%, 100% { transform: scale(0.94); opacity: 0.58; }
-            50% { transform: scale(1.04); opacity: 0.9; }
+
+            0%,
+            100% {
+                transform: scale(0.94);
+                opacity: 0.58;
+            }
+
+            50% {
+                transform: scale(1.04);
+                opacity: 0.9;
+            }
         }
 
         @keyframes core-ripple {
-            0% { transform: scale(0.78); opacity: 0.6; }
-            75% { transform: scale(1.15); opacity: 0.05; }
-            100% { transform: scale(1.22); opacity: 0; }
+            0% {
+                transform: scale(0.78);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: scale(1.15);
+                opacity: 0.05;
+            }
+
+            100% {
+                transform: scale(1.22);
+                opacity: 0;
+            }
         }
 
         @keyframes spark-float {
-            0% { transform: translate3d(0, 0, 0) scale(0.8); opacity: 0; }
-            20% { opacity: 0.9; }
-            50% { transform: translate3d(6px, -10px, 0) scale(1); opacity: 0.7; }
-            80% { opacity: 0.4; }
-            100% { transform: translate3d(-5px, -18px, 0) scale(0.75); opacity: 0; }
+            0% {
+                transform: translate3d(0, 0, 0) scale(0.8);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translate3d(6px, -10px, 0) scale(1);
+                opacity: 0.7;
+            }
+
+            80% {
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: translate3d(-5px, -18px, 0) scale(0.75);
+                opacity: 0;
+            }
         }
 
         .mini-chip {
-            border: 1px solid rgba(181, 61, 255, 0.45);
-            background: rgba(104, 53, 205, 0.22);
-            color: #d7b9ff;
-            border-radius: 999px;
-            font-size: 10px;
-            padding: 3px 8px;
+            border: 1.2px solid rgba(181, 61, 255, 0.55);
+            background: linear-gradient(135deg, rgba(109, 53, 205, 0.28), rgba(123, 77, 255, 0.18));
+            color: #e8d0ff;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
             margin-left: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 8px rgba(181, 61, 255, 0.25);
         }
 
         .title-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
+            gap: 12px;
+            margin-bottom: 6px;
         }
 
         .card-link {
             margin-left: auto;
-            font-size: 11px;
-            color: #8d99dd;
+            font-size: 12px;
+            color: #7a8adf;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .card-link:hover {
+            color: #9fb0ff;
         }
 
         .progress-row {
             font-size: 12px;
-            color: var(--text-3);
-            border: 1px solid rgba(95, 119, 216, 0.24);
-            border-radius: 10px;
-            padding: 8px 9px 7px;
-            background: rgba(10, 16, 40, 0.72);
+            color: #9fb0e8;
+            border: 1.5px solid rgba(116, 160, 255, 0.28);
+            border-radius: 11px;
+            padding: 11px 13px 10px;
+            background: rgba(10, 16, 40, 0.8);
+            box-shadow: inset 0 0 0 1px rgba(117, 134, 224, 0.1);
         }
 
         .progress-head {
@@ -811,29 +1173,34 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
+            margin-bottom: 8px;
         }
 
         .progress-percent {
-            color: #b9c5ff;
+            color: #d0d8ff;
             font-size: 13px;
-            min-width: 34px;
+            font-weight: 700;
+            min-width: 38px;
             text-align: right;
         }
 
         .progress {
-            height: 7px;
-            border-radius: 999px;
+            height: 8px;
+            border-radius: 6px;
             background: rgba(74, 89, 160, 0.35);
-            margin-top: 7px;
+            margin-top: 0;
             overflow: hidden;
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
         }
 
-        .progress > span {
+        .progress>span {
             display: block;
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #4d7bff, #a94bff);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #6d55ff, #a94bff);
+            transition: width 0.35s ease;
+            box-shadow: 0 0 10px rgba(173, 75, 255, 0.5);
+            border-radius: 6px;
         }
 
         .right-col {
@@ -845,17 +1212,18 @@
 
         .list {
             display: grid;
-            gap: 8px;
+            gap: 10px;
         }
 
         .row {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            font-size: 13px;
-            color: var(--text-2);
-            border-bottom: 1px solid rgba(122, 146, 255, 0.12);
-            padding-bottom: 7px;
+            gap: 12px;
+            font-size: 13.5px;
+            color: #b8c5f0;
+            border-bottom: 1px solid rgba(116, 160, 255, 0.15);
+            padding-bottom: 10px;
+            align-items: center;
         }
 
         .row:last-child {
@@ -863,33 +1231,54 @@
             padding-bottom: 0;
         }
 
+        .row span:first-child {
+            font-weight: 600;
+            color: #d5dcff;
+        }
+
+        .row span:last-child {
+            color: #9fb0e8;
+            font-size: 12px;
+        }
+
         .warning {
-            color: #ff92ad;
+            color: #ff9aac;
+            font-weight: 600;
         }
 
         .quick-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .quick-btn {
-            border: 1px solid rgba(122, 146, 255, 0.28);
-            border-radius: 9px;
-            background: rgba(11, 16, 39, 0.95);
-            color: var(--text-2);
-            padding: 8px;
-            font-size: 12.5px;
+            border: 1.2px solid rgba(116, 160, 255, 0.32);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(12, 20, 50, 0.85), rgba(14, 24, 56, 0.8));
+            color: #c8d4ff;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-weight: 600;
             text-align: left;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
+            transition: all 0.22s ease;
         }
 
         .quick-btn:hover {
-            border-color: rgba(181, 61, 255, 0.5);
-            color: var(--text-1);
+            border-color: rgba(181, 61, 255, 0.55);
+            color: #f3f6ff;
+            background: linear-gradient(135deg, rgba(20, 28, 60, 0.95), rgba(25, 35, 75, 0.9));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(109, 59, 255, 0.2);
+        }
+
+        .quick-btn:active {
+            transform: translateY(0);
         }
 
         .grid-bottom {
@@ -955,28 +1344,34 @@
 
         .mini-graph {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: flex-end;
-            min-height: 78px;
-            margin-top: 6px;
-            padding: 6px 4px 2px;
-            border-top: 1px solid rgba(122, 146, 255, 0.16);
+            min-height: 90px;
+            margin-top: 18px;
+            padding: 10px 6px 4px;
+            border-top: 1.5px solid rgba(116, 160, 255, 0.25);
         }
 
         .mini-bar {
             flex: 1;
-            min-width: 8px;
-            border-radius: 6px 6px 2px 2px;
-            background: linear-gradient(180deg, rgba(74, 123, 255, 0.95), rgba(122, 75, 255, 0.72));
-            box-shadow: 0 0 10px rgba(104, 113, 255, 0.25);
-            transition: height 0.35s ease;
-            height: 12px;
+            min-width: 10px;
+            border-radius: 8px 8px 3px 3px;
+            background: linear-gradient(180deg, rgba(109, 120, 255, 0.98), rgba(140, 100, 255, 0.82));
+            box-shadow: 0 0 12px rgba(120, 130, 255, 0.35);
+            transition: all 0.35s ease;
+            height: 14px;
+        }
+
+        .mini-bar:hover {
+            box-shadow: 0 0 16px rgba(140, 100, 255, 0.55);
+            filter: brightness(1.15);
         }
 
         .mini-graph-note {
-            margin-top: 6px;
-            font-size: 11px;
-            color: #a9b6e8;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #a0b0e0;
+            font-weight: 500;
         }
 
         ::-webkit-scrollbar {
@@ -996,40 +1391,31 @@
 
         .cap-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 11px;
-            color: var(--text-2);
-            font-size: 13px;
-            line-height: 1.25;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 13px;
+            color: #b8c5f0;
+            font-size: 13.5px;
+            line-height: 1.35;
         }
 
         .cap-item span {
-            color: var(--text-1);
-            font-weight: 600;
+            color: #f3f6ff;
+            font-weight: 700;
             display: block;
-            margin-bottom: 2px;
-        }
-
-        .dot-icon {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-top: 1px;
-            background: linear-gradient(140deg, rgba(31, 200, 255, 0.8), rgba(123, 77, 255, 0.8));
+            margin-bottom: 3px;
         }
 
         .cap-icon {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 0;
-            border: 1px solid rgba(142, 161, 255, 0.45);
-            box-shadow: 0 0 12px rgba(95, 119, 216, 0.28);
+            border: 1.5px solid rgba(142, 161, 255, 0.55);
+            box-shadow: 0 0 14px rgba(142, 161, 255, 0.35);
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -1038,18 +1424,42 @@
             display: inline-block;
             width: 100%;
             text-align: center;
-            font-size: 13px;
-            line-height: 30px;
+            font-size: 16px;
+            line-height: 36px;
             font-weight: 700;
             transform: none;
             font-family: "Segoe UI Symbol", "Inter", sans-serif;
         }
 
-        .cap-icon-resolve { color: #ff8fcb; border-color: rgba(255, 143, 203, 0.55); background: rgba(74, 24, 56, 0.85); }
-        .cap-icon-delegate { color: #86ffcf; border-color: rgba(134, 255, 207, 0.55); background: rgba(14, 62, 50, 0.85); }
-        .cap-icon-email { color: #78d8ff; border-color: rgba(120, 216, 255, 0.55); background: rgba(16, 48, 74, 0.85); }
-        .cap-icon-predict { color: #a89aff; border-color: rgba(168, 154, 255, 0.55); background: rgba(36, 28, 76, 0.85); }
-        .cap-icon-memory { color: #ffc778; border-color: rgba(255, 199, 120, 0.55); background: rgba(79, 44, 16, 0.85); }
+        .cap-icon-resolve {
+            color: #ffb0d8;
+            border-color: rgba(255, 143, 203, 0.65);
+            background: rgba(74, 24, 56, 0.9);
+        }
+
+        .cap-icon-delegate {
+            color: #a8ffdb;
+            border-color: rgba(134, 255, 207, 0.65);
+            background: rgba(14, 62, 50, 0.9);
+        }
+
+        .cap-icon-email {
+            color: #96e3ff;
+            border-color: rgba(120, 216, 255, 0.65);
+            background: rgba(16, 48, 74, 0.9);
+        }
+
+        .cap-icon-predict {
+            color: #c4b5ff;
+            border-color: rgba(196, 181, 255, 0.65);
+            background: rgba(36, 28, 76, 0.9);
+        }
+
+        .cap-icon-memory {
+            color: #ffe09e;
+            border-color: rgba(255, 224, 158, 0.65);
+            background: rgba(79, 44, 16, 0.9);
+        }
 
         .cap-copy {
             flex: 1;
@@ -1059,13 +1469,13 @@
         .resolution-list .res-item {
             display: grid;
             grid-template-columns: auto 1fr auto auto;
-            gap: 8px;
-            align-items: start;
-            font-size: 13px;
-            color: var(--text-2);
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(122, 146, 255, 0.12);
-            line-height: 1.3;
+            gap: 10px;
+            align-items: center;
+            font-size: 13.5px;
+            color: #b8c5f0;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(116, 160, 255, 0.15);
+            line-height: 1.4;
         }
 
         .resolution-list .res-item:last-child {
@@ -1073,18 +1483,21 @@
         }
 
         .check {
-            color: var(--green);
-            font-weight: 700;
+            color: #2ae08f;
+            font-weight: 800;
+            font-size: 16px;
         }
 
         .pill {
-            border-radius: 999px;
-            padding: 3px 9px;
-            font-size: 10px;
-            font-weight: 600;
-            border: 1px solid rgba(31, 218, 138, 0.35);
-            color: #92ffd2;
-            background: rgba(31, 218, 138, 0.12);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid rgba(42, 224, 143, 0.45);
+            color: #a8f5d8;
+            background: rgba(42, 224, 143, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         .promo-pro {
@@ -1166,32 +1579,48 @@
         }
 
         .metric {
-            background: var(--card-soft);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 12px 13px;
-            min-height: 92px;
+            background: linear-gradient(135deg, rgba(16, 30, 60, 0.82), rgba(18, 28, 55, 0.75));
+            border: 1.5px solid rgba(116, 160, 255, 0.32);
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(156, 166, 255, 0.08);
+            transition: all 0.25s ease;
+        }
+
+        .metric:hover {
+            border-color: rgba(116, 160, 255, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(116, 168, 255, 0.12), inset 0 0 0 1px rgba(156, 166, 255, 0.12);
         }
 
         .metric .label {
-            font-size: 12px;
-            color: var(--text-3);
-            margin-bottom: 6px;
+            font-size: 11px;
+            color: #9fb0e8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
 
         .metric .value {
-            font-size: 26px;
-            font-weight: 700;
-            line-height: 1.05;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, #f3f6ff 0%, #9fb0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .metric small {
-            color: var(--text-3);
-            font-size: 12px;
-            margin-top: 2px;
+            color: #8694ca;
+            font-size: 11px;
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         .ring {
@@ -1204,23 +1633,37 @@
         }
 
         .output-area {
-            margin-top: 10px;
-            border: 1px solid rgba(122, 146, 255, 0.24);
-            border-radius: 10px;
-            background: linear-gradient(180deg, rgba(8, 12, 30, 0.94), rgba(9, 14, 36, 0.88));
-            color: var(--text-2);
-            padding: 10px;
+            margin-top: 14px;
+            border: 1.5px solid rgba(116, 160, 255, 0.3);
+            border-radius: 11px;
+            background: linear-gradient(135deg, rgba(7, 12, 30, 0.92), rgba(9, 14, 36, 0.88));
+            color: #c8d4ff;
+            padding: 14px;
             font-size: 13px;
-            line-height: 1.5;
-            max-height: 112px;
+            line-height: 1.6;
+            max-height: 140px;
             overflow: auto;
             white-space: pre-wrap;
-            box-shadow: inset 0 0 0 1px rgba(117, 134, 224, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(117, 134, 224, 0.12), 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .output-area.compact {
-            max-height: 86px;
+            max-height: 100px;
             font-size: 12px;
+        }
+
+        .output-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .output-area::-webkit-scrollbar-track {
+            background: rgba(13, 19, 46, 0.3);
+            border-radius: 3px;
+        }
+
+        .output-area::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(109, 142, 255, 0.5), rgba(128, 85, 255, 0.5));
+            border-radius: 3px;
         }
 
         .hidden {
@@ -1228,6 +1671,7 @@
         }
 
         @media (max-width: 1380px) {
+
             .grid-main,
             .grid-bottom {
                 grid-template-columns: 1fr;
@@ -1306,6 +1750,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="app-shell">
         <aside class="sidebar">
@@ -1344,7 +1789,8 @@
                 <div class="status-row">
                     <div class="chip chip-about">
                         <div class="chip-label">About</div>
-                        <div class="chip-value">AetherMind is an adaptive AI agent that resolves personal workflow conflicts through clear communication, ethical reasoning, and smart decisions.</div>
+                        <div class="chip-value">AetherMind is an adaptive AI agent that resolves personal workflow
+                            conflicts through clear communication, ethical reasoning, and smart decisions.</div>
                     </div>
                     <div class="chip">
                         <div class="chip-label">Agent Status</div>
@@ -1358,211 +1804,260 @@
             </div>
 
             <div id="page-dashboard" class="page-view active">
-            <section class="grid-main">
-                <article class="card resolve-card">
-                    <div class="title-row"><h3>Resolve New Conflict</h3></div>
-                    <p class="card-note">Describe your conflicting events and I'll handle the rest.</p>
-                    <div class="field">
-                        <label>Event / Task A</label>
-                        <input id="event1" value="Investor meeting at 7 PM">
-                    </div>
-                    <div class="field">
-                        <label>Event / Task B</label>
-                        <input id="event2" value="Mother's birthday dinner">
-                    </div>
-                    <div class="field">
-                        <label>Priority</label>
-                        <select id="priority">
-                            <option value="event1">Investor meeting</option>
-                            <option value="event2" selected>Birthday dinner</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Additional Context / Email / Message</label>
-                        <textarea id="email">Boss wants investor slides tonight and expects final deck today.</textarea>
-                    </div>
-                    <button id="resolveBtn" class="btn-primary">Resolve Conflict</button>
-                    <div id="resolveOutput" class="output-area">Resolution output will appear here.</div>
-                </article>
-
-                <article class="card reasoning-wrap">
-                    <div>
-                        <div class="title-row"><h3>AetherMind Reasoning Engine</h3><span class="mini-chip">Analyzing</span></div>
-                        <p class="card-note">Multi-agent decision analysis in progress...</p>
-                        <div class="agent-ring">
-                            <div class="ring-outer"></div>
-                            <div class="ring-mid"></div>
-                            <div class="ring-core"></div>
-                            <span class="neural-spark spark-1"></span>
-                            <span class="neural-spark spark-2"></span>
-                            <span class="neural-spark spark-3"></span>
-                            <span class="neural-spark spark-4"></span>
-                            <span class="neural-spark spark-5"></span>
-                            <span class="neural-spark spark-6"></span>
-                            <span class="neural-spark spark-7"></span>
-                            <span class="neural-spark spark-8"></span>
-                            <span class="neural-spark spark-9"></span>
-                            <div class="connector conn-cal"></div>
-                            <div class="connector conn-del"></div>
-                            <div class="connector conn-con"></div>
-                            <div class="connector conn-em"></div>
-                            <div class="connector conn-mem"></div>
-                            <div class="connector conn-what"></div>
-                            <div class="connector conn-script"></div>
-                            <div class="connector conn-eth"></div>
-                            <div class="connector conn-feed"></div>
-
-                            <div class="agent-node node-cal">
-                                <span class="node-icon node-calendar">◷</span>
-                                <div><b>Calendar Agent</b><small id="node-cal-status">Checking availability</small></div>
-                            </div>
-                            <div class="agent-node node-del">
-                                <span class="node-icon node-delegation">⎇</span>
-                                <div><b>Delegation Agent</b><small id="node-del-status">Finding best options</small></div>
-                            </div>
-                            <div class="agent-node node-con">
-                                <span class="node-icon node-conflict">◇</span>
-                                <div><b>Conflict Analyzer</b><small id="node-con-status">Evaluating impact</small></div>
-                            </div>
-                            <div class="agent-node node-em">
-                                <span class="node-icon node-email">✉</span>
-                                <div><b>Email Agent</b><small id="node-em-status">Drafting response</small></div>
-                            </div>
-                            <div class="agent-node node-mem">
-                                <span class="node-icon node-memory">◎</span>
-                                <div><b>Memory Agent</b><small id="node-mem-status">Recalling preferences</small></div>
-                            </div>
-                            <div class="agent-node node-what">
-                                <span class="node-icon node-whatif">◈</span>
-                                <div><b>What-If Simulator</b><small id="node-what-status">Evaluating outcomes</small></div>
-                            </div>
-                            <div class="agent-node node-script">
-                                <span class="node-icon node-script-icon">✦</span>
-                                <div><b>Script Generator</b><small id="node-script-status">Drafting communication</small></div>
-                            </div>
-                            <div class="agent-node node-eth">
-                                <span class="node-icon node-ethics">⚖</span>
-                                <div><b>Ethical Filter</b><small id="node-eth-status">Validating decision safety</small></div>
-                            </div>
-                            <div class="agent-node node-feed">
-                                <span class="node-icon node-feedback">↺</span>
-                                <div><b>Feedback Loop</b><small id="node-feed-status">Learning from outcomes</small></div>
-                            </div>
-                            <div class="brain-core">🧠</div>
+                <section class="grid-main">
+                    <article class="card resolve-card">
+                        <div class="title-row">
+                            <h3>Resolve New Conflict</h3>
                         </div>
-                    </div>
-                    <div class="progress-row">
-                        <div class="progress-head">
-                            <div id="engineText">Evaluating priorities, dependencies and outcomes...</div>
-                            <div class="progress-percent" id="enginePercent">72%</div>
+                        <p class="card-note">Describe your conflicting events and I'll handle the rest.</p>
+                        <div class="field">
+                            <label>Event / Task A</label>
+                            <input id="event1" value="Investor meeting at 7 PM">
                         </div>
-                        <div class="progress"><span id="engineProgress"></span></div>
-                    </div>
-                    <div id="liveRewardGraph" class="mini-graph">
-                        <span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span>
-                        <span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span>
-                    </div>
-                    <div id="liveRewardGraphNote" class="mini-graph-note">Waiting for reward data...</div>
-                </article>
+                        <div class="field">
+                            <label>Event / Task B</label>
+                            <input id="event2" value="Mother's birthday dinner">
+                        </div>
+                        <div class="field">
+                            <label>Priority</label>
+                            <select id="priority">
+                                <option value="event1">Investor meeting</option>
+                                <option value="event2" selected>Birthday dinner</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Additional Context / Email / Message</label>
+                            <textarea
+                                id="email">Boss wants investor slides tonight and expects final deck today.</textarea>
+                        </div>
+                        <button id="resolveBtn" class="btn-primary">Resolve Conflict</button>
+                        <div id="resolveOutput" class="output-area">Resolution output will appear here.</div>
+                    </article>
 
-                <div class="right-col">
+                    <article class="card reasoning-wrap">
+                        <div>
+                            <div class="title-row">
+                                <h3>AetherMind Reasoning Engine</h3><span class="mini-chip">Analyzing</span>
+                            </div>
+                            <p class="card-note">Multi-agent decision analysis in progress...</p>
+                            <div class="agent-ring">
+                                <div class="ring-outer"></div>
+                                <div class="ring-mid"></div>
+                                <div class="ring-core"></div>
+                                <span class="neural-spark spark-1"></span>
+                                <span class="neural-spark spark-2"></span>
+                                <span class="neural-spark spark-3"></span>
+                                <span class="neural-spark spark-4"></span>
+                                <span class="neural-spark spark-5"></span>
+                                <span class="neural-spark spark-6"></span>
+                                <span class="neural-spark spark-7"></span>
+                                <span class="neural-spark spark-8"></span>
+                                <span class="neural-spark spark-9"></span>
+                                <div class="connector conn-cal"></div>
+                                <div class="connector conn-del"></div>
+                                <div class="connector conn-con"></div>
+                                <div class="connector conn-em"></div>
+                                <div class="connector conn-mem"></div>
+                                <div class="connector conn-what"></div>
+                                <div class="connector conn-script"></div>
+                                <div class="connector conn-eth"></div>
+                                <div class="connector conn-feed"></div>
+
+                                <div class="agent-node node-cal">
+                                    <span class="node-icon node-calendar">◷</span>
+                                    <div><b>Calendar Agent</b><small id="node-cal-status">Checking availability</small>
+                                    </div>
+                                </div>
+                                <div class="agent-node node-del">
+                                    <span class="node-icon node-delegation">⎇</span>
+                                    <div><b>Delegation Agent</b><small id="node-del-status">Finding best options</small>
+                                    </div>
+                                </div>
+                                <div class="agent-node node-con">
+                                    <span class="node-icon node-conflict">◇</span>
+                                    <div><b>Conflict Analyzer</b><small id="node-con-status">Evaluating impact</small>
+                                    </div>
+                                </div>
+                                <div class="agent-node node-em">
+                                    <span class="node-icon node-email">✉</span>
+                                    <div><b>Email Agent</b><small id="node-em-status">Drafting response</small></div>
+                                </div>
+                                <div class="agent-node node-mem">
+                                    <span class="node-icon node-memory">◎</span>
+                                    <div><b>Memory Agent</b><small id="node-mem-status">Recalling preferences</small>
+                                    </div>
+                                </div>
+                                <div class="agent-node node-what">
+                                    <span class="node-icon node-whatif">◈</span>
+                                    <div><b>What-If Simulator</b><small id="node-what-status">Evaluating
+                                            outcomes</small></div>
+                                </div>
+                                <div class="agent-node node-script">
+                                    <span class="node-icon node-script-icon">✦</span>
+                                    <div><b>Script Generator</b><small id="node-script-status">Drafting
+                                            communication</small></div>
+                                </div>
+                                <div class="agent-node node-eth">
+                                    <span class="node-icon node-ethics">⚖</span>
+                                    <div><b>Ethical Filter</b><small id="node-eth-status">Validating decision
+                                            safety</small></div>
+                                </div>
+                                <div class="agent-node node-feed">
+                                    <span class="node-icon node-feedback">↺</span>
+                                    <div><b>Feedback Loop</b><small id="node-feed-status">Learning from outcomes</small>
+                                    </div>
+                                </div>
+                                <div class="brain-core">🧠</div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-head">
+                                <div id="engineText">Evaluating priorities, dependencies and outcomes...</div>
+                                <div class="progress-percent" id="enginePercent">72%</div>
+                            </div>
+                            <div class="progress"><span id="engineProgress"></span></div>
+                        </div>
+                        <div id="liveRewardGraph" class="mini-graph">
+                            <span class="mini-bar"></span><span class="mini-bar"></span><span
+                                class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span>
+                            <span class="mini-bar"></span><span class="mini-bar"></span><span
+                                class="mini-bar"></span><span class="mini-bar"></span><span class="mini-bar"></span>
+                        </div>
+                        <div id="liveRewardGraphNote" class="mini-graph-note">Waiting for reward data...</div>
+                    </article>
+
+                    <div class="right-col">
+                        <article class="card">
+                            <div class="title-row">
+                                <h3>Live Scenario Snapshot</h3>
+                            </div>
+                            <div id="scheduleList" class="list">
+                                <div class="row"><span>Scenario</span><span>Waiting for first episode...</span></div>
+                                <div class="row"><span>Priority</span><span>N/A</span></div>
+                                <div class="row"><span>Policy</span><span>N/A</span></div>
+                                <div class="row"><span>Reward</span><span>N/A</span></div>
+                            </div>
+                        </article>
+
+                        <article class="card">
+                            <div class="title-row">
+                                <h3>Memory & Preferences</h3>
+                            </div>
+                            <div id="memoryList" class="list">
+                                <div class="row"><span>Prefers family over work (Unless urgent)</span></div>
+                                <div class="row"><span>Dislikes late night meetings</span></div>
+                                <div class="row"><span>Mother's birthday is very important</span></div>
+                                <div class="row"><span>Prefers honest and polite email tone</span></div>
+                            </div>
+                        </article>
+
+                        <article class="card">
+                            <h3>Quick Actions</h3>
+                            <div class="field" style="margin-bottom:10px"><label>Model (rewriter, emotion, mediation)</label><select id="quickLlmLevel">
+                                    <option value="standard" selected>Standard (fast)</option>
+                                    <option value="advanced">Advanced</option>
+                                    <option value="high">High (best quality)</option>
+                                </select></div>
+                            <div class="quick-grid">
+                                <button class="quick-btn" id="emailAction"><span>✉</span>Response Rewriter</button>
+                                <button class="quick-btn" id="delegateAction"><span>⎇</span>Mediation Mode</button>
+                                <button class="quick-btn" id="emotionAction"><span>◎</span>Emotion Detection</button>
+                                <button class="quick-btn" id="episodeAction"><span>◉</span>Run Episode</button>
+                            </div>
+                            <div id="quickOutput" class="output-area compact">Action results will appear here.</div>
+                        </article>
+
+                        <article class="card">
+                            <h3>Tool Use & Action Queue</h3>
+                            <div id="toolQueuePanel" class="output-area compact">Waiting for episode execution...</div>
+                        </article>
+
+                    </div>
+                </section>
+
+                <section class="grid-bottom">
                     <article class="card">
-                        <div class="title-row"><h3>Live Scenario Snapshot</h3></div>
-                        <div id="scheduleList" class="list">
-                            <div class="row"><span>Scenario</span><span>Waiting for first episode...</span></div>
-                            <div class="row"><span>Priority</span><span>N/A</span></div>
-                            <div class="row"><span>Policy</span><span>N/A</span></div>
-                            <div class="row"><span>Reward</span><span>N/A</span></div>
+                        <div class="title-row">
+                            <h3>Agent Capabilities</h3>
+                        </div>
+                        <div class="cap-item"><span class="cap-icon cap-icon-resolve"><span
+                                    class="cap-glyph">◇</span></span>
+                            <div class="cap-copy"><span>Conflict Resolution</span>Resolve complex scheduling conflicts
+                            </div>
+                        </div>
+                        <div class="cap-item"><span class="cap-icon cap-icon-delegate"><span
+                                    class="cap-glyph">⎇</span></span>
+                            <div class="cap-copy"><span>Smart Delegation</span>Find and assign the right person</div>
+                        </div>
+                        <div class="cap-item"><span class="cap-icon cap-icon-email"><span
+                                    class="cap-glyph">✉</span></span>
+                            <div class="cap-copy"><span>Email Generation</span>Context-aware email drafting</div>
+                        </div>
+                        <div class="cap-item"><span class="cap-icon cap-icon-predict"><span
+                                    class="cap-glyph">◈</span></span>
+                            <div class="cap-copy"><span>Predictive Scheduling</span>Predict and prevent future conflicts
+                            </div>
+                        </div>
+                        <div class="cap-item"><span class="cap-icon cap-icon-memory"><span
+                                    class="cap-glyph">◎</span></span>
+                            <div class="cap-copy"><span>Memory & Personalization</span>Learns your preferences over time
+                            </div>
                         </div>
                     </article>
 
                     <article class="card">
-                        <div class="title-row"><h3>Memory & Preferences</h3></div>
-                        <div id="memoryList" class="list">
-                            <div class="row"><span>Prefers family over work (Unless urgent)</span></div>
-                            <div class="row"><span>Dislikes late night meetings</span></div>
-                            <div class="row"><span>Mother's birthday is very important</span></div>
-                            <div class="row"><span>Prefers honest and polite email tone</span></div>
+                        <div class="title-row">
+                            <h3>Recent Resolutions</h3>
+                        </div>
+                        <div id="resolutionList" class="resolution-list">
+                            <div class="res-item"><span class="check">✓</span><span>No resolutions yet. Run a conflict
+                                    or episode.</span><span class="pill">Ready</span><span>now</span></div>
                         </div>
                     </article>
 
-                    <article class="card">
-                        <h3>Quick Actions</h3>
-                        <div class="quick-grid">
-                            <button class="quick-btn" id="emailAction"><span>✉</span>Response Rewriter</button>
-                            <button class="quick-btn" id="delegateAction"><span>⎇</span>Mediation Mode</button>
-                            <button class="quick-btn" id="emotionAction"><span>◎</span>Emotion Detection</button>
-                            <button class="quick-btn" id="episodeAction"><span>◉</span>Run Episode</button>
+                    <article class="card api-status-card">
+                        <h3>Live API Status</h3>
+                        <div id="healthOutput" class="output-area compact">Checking backend health...</div>
+                        <div class="api-promo-card">
+                            <div class="api-promo-title">AetherMind Pro</div>
+                            <div class="api-promo-sub">Unlock advanced reasoning, deeper memory and smarter agent
+                                collaboration.</div>
+                            <div class="api-theme-line">✦ Neural Insight Theme • Adaptive Decision Intelligence • Live
+                                Signal Mesh</div>
                         </div>
-                        <div id="quickOutput" class="output-area compact">Action results will appear here.</div>
                     </article>
+                </section>
 
-                    <article class="card">
-                        <h3>Tool Use & Action Queue</h3>
-                        <div id="toolQueuePanel" class="output-area compact">Waiting for episode execution...</div>
+                <section class="status-strip">
+                    <article class="metric">
+                        <div class="label">Conflicts Resolved</div>
+                        <div class="value" id="metricResolved">0</div>
+                        <small>auto-updated</small>
                     </article>
-
-                </div>
-            </section>
-
-            <section class="grid-bottom">
-                <article class="card">
-                    <div class="title-row"><h3>Agent Capabilities</h3></div>
-                    <div class="cap-item"><span class="cap-icon cap-icon-resolve"><span class="cap-glyph">◇</span></span><div class="cap-copy"><span>Conflict Resolution</span>Resolve complex scheduling conflicts</div></div>
-                    <div class="cap-item"><span class="cap-icon cap-icon-delegate"><span class="cap-glyph">⎇</span></span><div class="cap-copy"><span>Smart Delegation</span>Find and assign the right person</div></div>
-                    <div class="cap-item"><span class="cap-icon cap-icon-email"><span class="cap-glyph">✉</span></span><div class="cap-copy"><span>Email Generation</span>Context-aware email drafting</div></div>
-                    <div class="cap-item"><span class="cap-icon cap-icon-predict"><span class="cap-glyph">◈</span></span><div class="cap-copy"><span>Predictive Scheduling</span>Predict and prevent future conflicts</div></div>
-                    <div class="cap-item"><span class="cap-icon cap-icon-memory"><span class="cap-glyph">◎</span></span><div class="cap-copy"><span>Memory & Personalization</span>Learns your preferences over time</div></div>
-                </article>
-
-                <article class="card">
-                    <div class="title-row"><h3>Recent Resolutions</h3></div>
-                    <div id="resolutionList" class="resolution-list">
-                        <div class="res-item"><span class="check">✓</span><span>No resolutions yet. Run a conflict or episode.</span><span class="pill">Ready</span><span>now</span></div>
-                    </div>
-                </article>
-
-                <article class="card api-status-card">
-                    <h3>Live API Status</h3>
-                    <div id="healthOutput" class="output-area compact">Checking backend health...</div>
-                    <div class="api-promo-card">
-                        <div class="api-promo-title">AetherMind Pro</div>
-                        <div class="api-promo-sub">Unlock advanced reasoning, deeper memory and smarter agent collaboration.</div>
-                        <div class="api-theme-line">✦ Neural Insight Theme • Adaptive Decision Intelligence • Live Signal Mesh</div>
-                    </div>
-                </article>
-            </section>
-
-            <section class="status-strip">
-                <article class="metric">
-                    <div class="label">Conflicts Resolved</div>
-                    <div class="value" id="metricResolved">0</div>
-                    <small>auto-updated</small>
-                </article>
-                <article class="metric">
-                    <div class="label">Time Saved</div>
-                    <div class="value" id="metricSaved">0.0 hrs</div>
-                    <small>estimated</small>
-                </article>
-                <article class="metric">
-                    <div class="label">Emails Drafted</div>
-                    <div class="value" id="metricEmails">0</div>
-                    <small>from history</small>
-                </article>
-                <article class="metric">
-                    <div class="label">Tasks Delegated</div>
-                    <div class="value" id="metricDelegated">0</div>
-                    <small>from episodes</small>
-                </article>
-                <article class="metric">
-                    <div class="label">Success Rate</div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <div class="value" id="metricSuccess">0%</div>
-                        <div class="ring"></div>
-                    </div>
-                    <small>reward-based</small>
-                </article>
-            </section>
+                    <article class="metric">
+                        <div class="label">Time Saved</div>
+                        <div class="value" id="metricSaved">0.0 hrs</div>
+                        <small>estimated</small>
+                    </article>
+                    <article class="metric">
+                        <div class="label">Emails Drafted</div>
+                        <div class="value" id="metricEmails">0</div>
+                        <small>from history</small>
+                    </article>
+                    <article class="metric">
+                        <div class="label">Tasks Delegated</div>
+                        <div class="value" id="metricDelegated">0</div>
+                        <small>from episodes</small>
+                    </article>
+                    <article class="metric">
+                        <div class="label">Success Rate</div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div class="value" id="metricSuccess">0%</div>
+                            <div class="ring"></div>
+                        </div>
+                        <small>reward-based</small>
+                    </article>
+                </section>
             </div>
 
             <div id="page-resolver" class="page-view">
@@ -1574,9 +2069,19 @@
                         <div class="field"><label>Task B</label><input id="r_event2" value="Family dinner"></div>
                         <div class="field">
                             <label>Priority</label>
-                            <select id="r_priority"><option value="event1">Task A</option><option value="event2">Task B</option></select>
+                            <select id="r_priority">
+                                <option value="event1">Task A</option>
+                                <option value="event2">Task B</option>
+                            </select>
                         </div>
-                        <div class="field"><label>Context</label><textarea id="r_email">Need to finalize work and still respect family commitments.</textarea></div>
+                        <div class="field"><label>Context</label><textarea
+                                id="r_email">Need to finalize work and still respect family commitments.</textarea>
+                        </div>
+                        <div class="field"><label>Model</label><select id="resolverPageModel">
+                                <option value="standard" selected>Standard (fast)</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="high">High (best quality)</option>
+                            </select></div>
                         <button class="btn-primary" id="resolverPageBtn">Resolve Conflict</button>
                     </article>
                     <article class="card">
@@ -1591,7 +2096,14 @@
                     <article class="card">
                         <h3>Emotion Detection Module</h3>
                         <p class="card-note">Analyze emotional tone and guidance.</p>
-                        <div class="field"><label>Text Input</label><textarea id="emotionPageText">I'm stressed and upset because timelines keep changing.</textarea></div>
+                        <div class="field"><label>Text Input</label><textarea
+                                id="emotionPageText">I'm stressed and upset because timelines keep changing.</textarea>
+                        </div>
+                        <div class="field"><label>Model</label><select id="emotionPageModel">
+                                <option value="standard" selected>Standard (fast)</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="high">High (best quality)</option>
+                            </select></div>
                         <button class="btn-primary" id="emotionPageBtn">Analyze Emotion</button>
                     </article>
                     <article class="card">
@@ -1606,8 +2118,13 @@
                     <article class="card">
                         <h3>Response Rewriter</h3>
                         <p class="card-note">Turn heated language into calm professional communication.</p>
-                        <div class="field"><label>Original Message</label><textarea id="rewritePageText">This is a mess. Nobody is doing their job.</textarea></div>
-                        <div class="field"><label>LLM Level</label><select id="rewritePageLevel"><option value="advanced">Advanced</option><option value="standard">Standard</option></select></div>
+                        <div class="field"><label>Original Message</label><textarea
+                                id="rewritePageText">This is a mess. Nobody is doing their job.</textarea></div>
+                        <div class="field"><label>Model</label><select id="rewritePageLevel">
+                                <option value="standard" selected>Standard (fast)</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="high">High (best quality)</option>
+                            </select></div>
                         <button class="btn-primary" id="rewritePageBtn">Rewrite Calmly</button>
                     </article>
                     <article class="card">
@@ -1622,9 +2139,17 @@
                     <article class="card">
                         <h3>Mediation Mode</h3>
                         <p class="card-note">Neutral AI facilitation between two sides.</p>
-                        <div class="field"><label>Side A</label><textarea id="mediatePageA">We must deliver quickly.</textarea></div>
-                        <div class="field"><label>Side B</label><textarea id="mediatePageB">We must protect quality.</textarea></div>
-                        <div class="field"><label>Shared Goal</label><input id="mediatePageGoal" value="Launch successfully with trust"></div>
+                        <div class="field"><label>Side A</label><textarea
+                                id="mediatePageA">We must deliver quickly.</textarea></div>
+                        <div class="field"><label>Side B</label><textarea
+                                id="mediatePageB">We must protect quality.</textarea></div>
+                        <div class="field"><label>Shared Goal</label><input id="mediatePageGoal"
+                                value="Launch successfully with trust"></div>
+                        <div class="field"><label>Model</label><select id="mediatePageModel">
+                                <option value="standard" selected>Standard (fast)</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="high">High (best quality)</option>
+                            </select></div>
                         <button class="btn-primary" id="mediatePageBtn">Generate Mediation Plan</button>
                     </article>
                     <article class="card">
@@ -1659,7 +2184,9 @@
                     <article class="card">
                         <h3>What-If Simulation Mode</h3>
                         <p class="card-note">Compare possible options with risk and benefit scoring.</p>
-                        <div class="field"><label>Scenario</label><textarea id="whatIfScenario">Dinner conflict with an urgent investor review at the same time.</textarea></div>
+                        <div class="field"><label>Scenario</label><textarea
+                                id="whatIfScenario">Dinner conflict with an urgent investor review at the same time.</textarea>
+                        </div>
                         <div class="field"><label>Options (one per line)</label><textarea id="whatIfOptions">Delegate investor prep to teammate
 Join dinner and send summary later
 Reschedule dinner by one hour with apology</textarea></div>
@@ -1677,15 +2204,29 @@ Reschedule dinner by one hour with apology</textarea></div>
                     <article class="card">
                         <h3>Communication Script Generator</h3>
                         <p class="card-note">Generate clear scripts for difficult conversations.</p>
-                        <div class="field"><label>Audience</label><input id="scriptAudience" value="My manager and family group"></div>
-                        <div class="field"><label>Objective</label><input id="scriptObjective" value="Align on revised schedule without conflict"></div>
-                        <div class="field"><label>Tone</label><select id="scriptTone"><option value="calm" selected>Calm</option><option value="formal">Formal</option><option value="empathetic">Empathetic</option></select></div>
-                        <div class="field"><label>Context</label><textarea id="scriptContext">I need to shift one commitment while preserving trust and clarity.</textarea></div>
+                        <div class="field"><label>Audience</label><input id="scriptAudience"
+                                value="My manager and family group"></div>
+                        <div class="field"><label>Objective</label><input id="scriptObjective"
+                                value="Align on revised schedule without conflict"></div>
+                        <div class="field"><label>Tone</label><select id="scriptTone">
+                                <option value="calm" selected>Calm</option>
+                                <option value="formal">Formal</option>
+                                <option value="empathetic">Empathetic</option>
+                            </select></div>
+                        <div class="field"><label>Context</label><textarea
+                                id="scriptContext">I need to shift one commitment while preserving trust and clarity.</textarea>
+                        </div>
+                        <div class="field"><label>Model</label><select id="scriptPageModel">
+                                <option value="standard" selected>Standard (fast)</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="high">High (best quality)</option>
+                            </select></div>
                         <button class="btn-primary" id="scriptBtn">Generate Script</button>
                     </article>
                     <article class="card">
                         <h3>Generated Script</h3>
-                        <div id="scriptOutput" class="output-area">Generated communication script will appear here...</div>
+                        <div id="scriptOutput" class="output-area">Generated communication script will appear here...
+                        </div>
                     </article>
                 </section>
             </div>
@@ -1695,8 +2236,12 @@ Reschedule dinner by one hour with apology</textarea></div>
                     <article class="card">
                         <h3>Ethical Decision Filter</h3>
                         <p class="card-note">Check fairness, privacy, safety, transparency, and autonomy.</p>
-                        <div class="field"><label>Decision</label><textarea id="ethicsDecision">Share project updates with all stakeholders and delay one private detail until consent is confirmed.</textarea></div>
-                        <div class="field"><label>Context</label><textarea id="ethicsContext">Urgent coordination is needed, but personal details must remain protected.</textarea></div>
+                        <div class="field"><label>Decision</label><textarea
+                                id="ethicsDecision">Share project updates with all stakeholders and delay one private detail until consent is confirmed.</textarea>
+                        </div>
+                        <div class="field"><label>Context</label><textarea
+                                id="ethicsContext">Urgent coordination is needed, but personal details must remain protected.</textarea>
+                        </div>
                         <button class="btn-primary" id="ethicsBtn">Run Ethical Check</button>
                     </article>
                     <article class="card">
@@ -1711,10 +2256,16 @@ Reschedule dinner by one hour with apology</textarea></div>
                     <article class="card">
                         <h3>Feedback Reinforcement Loop</h3>
                         <p class="card-note">Feed outcomes back to improve future decision behavior.</p>
-                        <div class="field"><label>Action Taken</label><input id="feedbackAction" value="Rescheduled investor review and delegated prep"></div>
-                        <div class="field"><label>Observed Outcome</label><textarea id="feedbackOutcome">Conflict reduced and both stakeholders accepted the plan.</textarea></div>
-                        <div class="field"><label>Rating (-2 to 2)</label><input id="feedbackRating" type="number" min="-2" max="2" step="0.5" value="1"></div>
-                        <div class="field"><label>Feedback Notes</label><textarea id="feedbackText">Delegation worked well, but reminder timing can improve.</textarea></div>
+                        <div class="field"><label>Action Taken</label><input id="feedbackAction"
+                                value="Rescheduled investor review and delegated prep"></div>
+                        <div class="field"><label>Observed Outcome</label><textarea
+                                id="feedbackOutcome">Conflict reduced and both stakeholders accepted the plan.</textarea>
+                        </div>
+                        <div class="field"><label>Rating (-2 to 2)</label><input id="feedbackRating" type="number"
+                                min="-2" max="2" step="0.5" value="1"></div>
+                        <div class="field"><label>Feedback Notes</label><textarea
+                                id="feedbackText">Delegation worked well, but reminder timing can improve.</textarea>
+                        </div>
                         <button class="btn-primary" id="feedbackBtn">Submit Feedback</button>
                     </article>
                     <article class="card">
@@ -1730,7 +2281,54 @@ Reschedule dinner by one hour with apology</textarea></div>
     </div>
 
     <script>
-        const API_BASE = window.location.origin || "http://localhost:5000";
+        function resolveApiBase() {
+            try {
+                const q = new URLSearchParams(window.location.search).get("api");
+                if (q) {
+                    return String(q).replace(/\/$/, "");
+                }
+                const ls = localStorage.getItem("lifeosApiBase");
+                if (ls) {
+                    return String(ls).replace(/\/$/, "");
+                }
+            } catch (e) {
+                /* ignore */
+            }
+            if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+                const o = window.location.origin;
+                if (o && o !== "null") {
+                    return o;
+                }
+            }
+            /* file:// and broken origins: use dev server the app is meant to call */
+            return "http://127.0.0.1:5000";
+        }
+        const API_BASE = resolveApiBase();
+
+        function networkErrorHelp() {
+            return (
+                "Could not reach the API at " +
+                API_BASE +
+                ".\n\n" +
+                "1) Start the backend:  python app/app.py  (listens on port 5000 by default)\n" +
+                "2) Or open the UI from the server:  http://127.0.0.1:5000/  (not a raw file: URL)\n" +
+                "3) If you use another host/port, add to the address bar:  ?api=http://127.0.0.1:5000" +
+                "  or in the browser console:  localStorage.setItem('lifeosApiBase','http://…')"
+            );
+        }
+
+        function formatFetchError(err) {
+            const m = err && err.message ? String(err.message) : String(err || "");
+            if (
+                m === "Failed to fetch" ||
+                m.indexOf("NetworkError") !== -1 ||
+                m.indexOf("Load failed") !== -1 ||
+                m === "The user aborted a request."
+            ) {
+                return networkErrorHelp();
+            }
+            return m || "Unknown error";
+        }
         const engineLines = [
             "Evaluating priorities, dependencies and outcomes...",
             "Running planner and predictor on current scenario...",
@@ -1786,8 +2384,227 @@ Reschedule dinner by one hour with apology</textarea></div>
             document.getElementById(id).textContent = text;
         }
 
-        function asPretty(data) {
-            return typeof data === "string" ? data : JSON.stringify(data, null, 2);
+        function getQuickLlmLevel() {
+            const el = document.getElementById("quickLlmLevel");
+            return el ? el.value : "high";
+        }
+
+        function formatApiError(data) {
+            if (!data || typeof data !== "object") {
+                return String(data);
+            }
+            if (!data.error) {
+                return "";
+            }
+            let s = String(data.error);
+            if (Array.isArray(data.missing) && data.missing.length) {
+                s += "\nMissing: " + data.missing.join(", ");
+            }
+            if (data.details) {
+                s += "\n" + data.details;
+            }
+            return s;
+        }
+
+        function resultAsText(data) {
+            if (!data || typeof data !== "object") {
+                return "";
+            }
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            if (data.result === undefined || data.result === null) {
+                return "";
+            }
+            return typeof data.result === "string" ? data.result : String(data.result);
+        }
+
+        function formatEmotionText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const e = data.emotion || "unknown";
+            const c = data.confidence || "n/a";
+            const tier = data.model_tier || "standard";
+            const g = data.guidance || "";
+            return `Emotion: ${e}\nModel: ${tier}\nMatch confidence: ${c}\n\n${g}`;
+        }
+
+        function formatWhatIfText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const lines = [];
+            lines.push(`Scenario: ${data.scenario || ""}`);
+            lines.push(`Options evaluated: ${data.evaluated_options || 0}`);
+            lines.push("");
+            const rows = data.ranked_outcomes || [];
+            rows.forEach((row, i) => {
+                lines.push(`${i + 1}. ${row.option}`);
+                lines.push(
+                    `   Net score: ${row.net_score}  •  Risk: ${row.risk_pct}%  •  Benefit: ${row.benefit_pct}%`
+                );
+                lines.push(
+                    `   Suggestion: ${String(row.recommendation || "").replace(/_/g, " ")}`
+                );
+                if (row.impact_note) {
+                    lines.push(`   ${row.impact_note}`);
+                }
+                lines.push("");
+            });
+            if (data.best_option && data.best_option.option) {
+                lines.push(`Top pick: ${data.best_option.option}`);
+            }
+            return lines.join("\n").trim();
+        }
+
+        function formatEthicalText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const lines = [];
+            const verdict = String(data.verdict || "unknown").replace(/_/g, " ");
+            lines.push(`Verdict: ${verdict}`);
+            lines.push(`Overall score: ${data.overall_score ?? "—"}/100`);
+            lines.push("");
+            lines.push("Dimension scores:");
+            const scores = data.scores || {};
+            Object.keys(scores).forEach((k) => {
+                lines.push(`  ${k}: ${scores[k]}`);
+            });
+            if (Array.isArray(data.flags) && data.flags.length) {
+                lines.push("");
+                lines.push("Review flags: " + data.flags.join(", "));
+            }
+            if (Array.isArray(data.suggestions) && data.suggestions.length) {
+                lines.push("");
+                lines.push("Suggestions:");
+                data.suggestions.forEach((s) => {
+                    lines.push("  • " + s);
+                });
+            }
+            return lines.join("\n").trim();
+        }
+
+        function formatFeedbackEntryText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const lines = [];
+            lines.push("Feedback saved.");
+            lines.push(
+                `Entries: ${data.entries}  •  Avg rating: ${data.avg_rating}  •  Trend: ${data.trend || "—"}`
+            );
+            if (data.reinforcement_plan) {
+                lines.push(`Reinforcement: ${data.reinforcement_plan}`);
+            }
+            const L = data.latest;
+            if (L) {
+                lines.push("");
+                lines.push("Latest:");
+                if (L.action) {
+                    lines.push(`  Action: ${L.action}`);
+                }
+                if (L.outcome) {
+                    lines.push(`  Outcome: ${L.outcome}`);
+                }
+                if (L.rating !== undefined) {
+                    lines.push(`  Rating: ${L.rating}`);
+                }
+                if (L.feedback) {
+                    lines.push(`  Notes: ${L.feedback}`);
+                }
+            }
+            return lines.join("\n").trim();
+        }
+
+        function formatFeedbackSummaryText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const lines = [];
+            lines.push(`Entries: ${data.entries ?? 0}`);
+            lines.push(`Average rating: ${data.avg_rating ?? "—"}`);
+            lines.push(`Trend: ${data.trend || "—"}`);
+            const recent = data.recent || [];
+            if (recent.length) {
+                lines.push("");
+                lines.push("Recent:");
+                recent.slice().reverse().forEach((r, i) => {
+                    const o = (r.outcome || "").replace(/\n/g, " ");
+                    lines.push(
+                        `  ${i + 1}. ${r.action} → ${r.rating} — ${o.slice(0, 80)}${o.length > 80 ? "…" : ""}`
+                    );
+                });
+            }
+            return lines.join("\n").trim();
+        }
+
+        function formatHistoryText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            const lines = [];
+            lines.push(`Total entries: ${data.total ?? 0}`);
+            if (data.top_emotion) {
+                lines.push(`Top emotion in notes: ${data.top_emotion}`);
+            }
+            const recent = data.recent || [];
+            if (!recent.length) {
+                lines.push("");
+                lines.push("No resolution history yet.");
+                return lines.join("\n");
+            }
+            lines.push("");
+            lines.push("Recent resolutions (newest first):");
+            recent
+                .slice()
+                .reverse()
+                .forEach((item, i) => {
+                    lines.push("");
+                    lines.push(`— ${i + 1} —`);
+                    if (item.timestamp) {
+                        lines.push(`Time: ${item.timestamp}`);
+                    }
+                    if (item.event1) {
+                        lines.push(`Event A: ${item.event1}`);
+                    }
+                    if (item.event2) {
+                        lines.push(`Event B: ${item.event2}`);
+                    }
+                    if (item.priority) {
+                        lines.push(`Priority: ${item.priority}`);
+                    }
+                    if (item.emotion) {
+                        lines.push(`Email tone: ${item.emotion}`);
+                    }
+                    if (item.result) {
+                        const r =
+                            typeof item.result === "string"
+                                ? item.result
+                                : JSON.stringify(item.result);
+                        lines.push("Resolution:\n" + r);
+                    }
+                });
+            return lines.join("\n").trim();
+        }
+
+        function formatScriptText(data) {
+            const err = formatApiError(data);
+            if (err) {
+                return err;
+            }
+            if (data.script) {
+                return data.script;
+            }
+            return "No script returned.";
         }
 
         function switchPage(pageName) {
@@ -1815,7 +2632,7 @@ Reschedule dinner by one hour with apology</textarea></div>
                     `Status: ${status}\nModel: ${model}\nModel state: ${ready}${modelErr}`
                 );
             } catch (err) {
-                setOutput("healthOutput", "Backend unreachable. Start app with: python app/app.py");
+                setOutput("healthOutput", "Backend unreachable.\n\n" + formatFetchError(err));
             }
         }
 
@@ -1938,7 +2755,8 @@ Reschedule dinner by one hour with apology</textarea></div>
                 event1: document.getElementById("event1").value,
                 event2: document.getElementById("event2").value,
                 priority: document.getElementById("priority").value,
-                email: document.getElementById("email").value
+                email: document.getElementById("email").value,
+                llm_level: getQuickLlmLevel()
             };
             const btn = document.getElementById("resolveBtn");
             btn.disabled = true;
@@ -1950,7 +2768,7 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                const resultText = data.result || asPretty(data);
+                const resultText = resultAsText(data) || "No result returned.";
                 setOutput("resolveOutput", resultText);
                 const highlights = parseResolveResult(resultText);
                 const shortTitle = highlights[0] || `${payload.event1} vs ${payload.event2}`;
@@ -1959,7 +2777,7 @@ Reschedule dinner by one hour with apology</textarea></div>
                 await updateMetrics();
                 await refreshReasoningNodes();
             } catch (err) {
-                setOutput("resolveOutput", `Resolve failed: ${err.message}`);
+                setOutput("resolveOutput", `Resolve failed: ${formatFetchError(err)}`);
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Resolve Conflict";
@@ -1975,7 +2793,7 @@ Reschedule dinner by one hour with apology</textarea></div>
                 await loadMemoryHints();
                 await refreshReasoningNodes();
             } catch (err) {
-                setOutput("quickOutput", `Episode failed: ${err.message}`);
+                setOutput("quickOutput", `Episode failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -1985,12 +2803,12 @@ Reschedule dinner by one hour with apology</textarea></div>
                 const res = await fetch(`${API_BASE}/emotion`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ text })
+                    body: JSON.stringify({ text, llm_level: getQuickLlmLevel() })
                 });
                 const data = await res.json();
-                setOutput("quickOutput", `Emotion Analysis\n${asPretty(data)}`);
+                setOutput("quickOutput", `Emotion analysis\n\n${formatEmotionText(data)}`);
             } catch (err) {
-                setOutput("quickOutput", `Emotion analysis failed: ${err.message}`);
+                setOutput("quickOutput", `Emotion analysis failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2000,12 +2818,12 @@ Reschedule dinner by one hour with apology</textarea></div>
                 const res = await fetch(`${API_BASE}/rewrite`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message, llm_level: "advanced" })
+                    body: JSON.stringify({ message, llm_level: getQuickLlmLevel() })
                 });
                 const data = await res.json();
-                setOutput("quickOutput", `Email Draft\n${data.result || asPretty(data)}`);
+                setOutput("quickOutput", `Email draft\n\n${resultAsText(data) || "No draft returned."}`);
             } catch (err) {
-                setOutput("quickOutput", `Email drafting failed: ${err.message}`);
+                setOutput("quickOutput", `Email drafting failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2019,13 +2837,17 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify({
                         side_a: sideA,
                         side_b: sideB,
-                        shared_goal: "Balance outcomes with minimum conflict"
+                        shared_goal: "Balance outcomes with minimum conflict",
+                        llm_level: getQuickLlmLevel()
                     })
                 });
                 const data = await res.json();
-                setOutput("quickOutput", `Delegation/Mediation\n${data.result || asPretty(data)}`);
+                setOutput(
+                    "quickOutput",
+                    `Delegation / mediation\n\n${resultAsText(data) || "No plan returned."}`
+                );
             } catch (err) {
-                setOutput("quickOutput", `Delegation failed: ${err.message}`);
+                setOutput("quickOutput", `Delegation failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2034,7 +2856,8 @@ Reschedule dinner by one hour with apology</textarea></div>
                 event1: document.getElementById("r_event1").value,
                 event2: document.getElementById("r_event2").value,
                 priority: document.getElementById("r_priority").value,
-                email: document.getElementById("r_email").value
+                email: document.getElementById("r_email").value,
+                llm_level: document.getElementById("resolverPageModel").value
             };
             const btn = document.getElementById("resolverPageBtn");
             btn.disabled = true;
@@ -2046,9 +2869,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                setOutput("resolverPageOutput", data.result || asPretty(data));
+                setOutput("resolverPageOutput", resultAsText(data) || "No result returned.");
             } catch (err) {
-                setOutput("resolverPageOutput", `Resolve failed: ${err.message}`);
+                setOutput("resolverPageOutput", `Resolve failed: ${formatFetchError(err)}`);
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Resolve Conflict";
@@ -2058,15 +2881,16 @@ Reschedule dinner by one hour with apology</textarea></div>
         async function analyzeEmotionPage() {
             try {
                 const text = document.getElementById("emotionPageText").value;
+                const llm_level = document.getElementById("emotionPageModel").value;
                 const res = await fetch(`${API_BASE}/emotion`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ text })
+                    body: JSON.stringify({ text, llm_level })
                 });
                 const data = await res.json();
-                setOutput("emotionPageOutput", asPretty(data));
+                setOutput("emotionPageOutput", formatEmotionText(data));
             } catch (err) {
-                setOutput("emotionPageOutput", `Emotion analysis failed: ${err.message}`);
+                setOutput("emotionPageOutput", `Emotion analysis failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2080,9 +2904,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify({ message, llm_level })
                 });
                 const data = await res.json();
-                setOutput("rewritePageOutput", data.result || asPretty(data));
+                setOutput("rewritePageOutput", resultAsText(data) || "No rewrite returned.");
             } catch (err) {
-                setOutput("rewritePageOutput", `Rewrite failed: ${err.message}`);
+                setOutput("rewritePageOutput", `Rewrite failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2091,15 +2915,16 @@ Reschedule dinner by one hour with apology</textarea></div>
                 const side_a = document.getElementById("mediatePageA").value;
                 const side_b = document.getElementById("mediatePageB").value;
                 const shared_goal = document.getElementById("mediatePageGoal").value;
+                const llm_level = document.getElementById("mediatePageModel").value;
                 const res = await fetch(`${API_BASE}/mediate`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ side_a, side_b, shared_goal })
+                    body: JSON.stringify({ side_a, side_b, shared_goal, llm_level })
                 });
                 const data = await res.json();
-                setOutput("mediatePageOutput", data.result || asPretty(data));
+                setOutput("mediatePageOutput", resultAsText(data) || "No mediation plan returned.");
             } catch (err) {
-                setOutput("mediatePageOutput", `Mediation failed: ${err.message}`);
+                setOutput("mediatePageOutput", `Mediation failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2107,9 +2932,9 @@ Reschedule dinner by one hour with apology</textarea></div>
             try {
                 const res = await fetch(`${API_BASE}/history`);
                 const data = await res.json();
-                setOutput("historyPageOutput", asPretty(data));
+                setOutput("historyPageOutput", formatHistoryText(data));
             } catch (err) {
-                setOutput("historyPageOutput", `History load failed: ${err.message}`);
+                setOutput("historyPageOutput", `History load failed: ${formatFetchError(err)}`);
             }
 
             if (showEpisodes) {
@@ -2129,7 +2954,7 @@ Reschedule dinner by one hour with apology</textarea></div>
                         return `<div class="history-item"><strong>#${idx + 1}</strong> Persona: ${persona}<br>Reward: ${reward} • Drift: ${policy}</div>`;
                     }).join("");
                 } catch (err) {
-                    document.getElementById("historyPageList").innerHTML = `<div class="history-item">Episode load failed: ${err.message}</div>`;
+                    document.getElementById("historyPageList").innerHTML = `<div class="history-item">Episode load failed: ${formatFetchError(err)}</div>`;
                 }
             }
         }
@@ -2147,9 +2972,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify({ scenario, options })
                 });
                 const data = await res.json();
-                setOutput("whatIfOutput", asPretty(data));
+                setOutput("whatIfOutput", formatWhatIfText(data));
             } catch (err) {
-                setOutput("whatIfOutput", `Simulation failed: ${err.message}`);
+                setOutput("whatIfOutput", `Simulation failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2159,7 +2984,8 @@ Reschedule dinner by one hour with apology</textarea></div>
                     audience: document.getElementById("scriptAudience").value,
                     objective: document.getElementById("scriptObjective").value,
                     tone: document.getElementById("scriptTone").value,
-                    context: document.getElementById("scriptContext").value
+                    context: document.getElementById("scriptContext").value,
+                    llm_level: document.getElementById("scriptPageModel").value
                 };
                 const res = await fetch(`${API_BASE}/api/communication-script`, {
                     method: "POST",
@@ -2167,9 +2993,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                setOutput("scriptOutput", data.script || asPretty(data));
+                setOutput("scriptOutput", formatScriptText(data));
             } catch (err) {
-                setOutput("scriptOutput", `Script generation failed: ${err.message}`);
+                setOutput("scriptOutput", `Script generation failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2185,9 +3011,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                setOutput("ethicsOutput", asPretty(data));
+                setOutput("ethicsOutput", formatEthicalText(data));
             } catch (err) {
-                setOutput("ethicsOutput", `Ethical filter failed: ${err.message}`);
+                setOutput("ethicsOutput", `Ethical filter failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2205,9 +3031,9 @@ Reschedule dinner by one hour with apology</textarea></div>
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                setOutput("feedbackOutput", asPretty(data));
+                setOutput("feedbackOutput", formatFeedbackEntryText(data));
             } catch (err) {
-                setOutput("feedbackOutput", `Feedback submission failed: ${err.message}`);
+                setOutput("feedbackOutput", `Feedback submission failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2215,9 +3041,9 @@ Reschedule dinner by one hour with apology</textarea></div>
             try {
                 const res = await fetch(`${API_BASE}/api/feedback-loop/summary`);
                 const data = await res.json();
-                setOutput("feedbackOutput", asPretty(data));
+                setOutput("feedbackOutput", formatFeedbackSummaryText(data));
             } catch (err) {
-                setOutput("feedbackOutput", `Summary load failed: ${err.message}`);
+                setOutput("feedbackOutput", `Summary load failed: ${formatFetchError(err)}`);
             }
         }
 
@@ -2354,4 +3180,5 @@ Reschedule dinner by one hour with apology</textarea></div>
         switchPage("dashboard");
     </script>
 </body>
+
 </html>

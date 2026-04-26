@@ -767,6 +767,50 @@ Risk Level: low
 Confidence: high"""
 
 
+def _looks_like_general_question(text: str) -> bool:
+    t = (text or "").strip().lower()
+    if not t:
+        return False
+    starts = (
+        "what", "why", "how", "when", "where", "who",
+        "can ", "could ", "should ", "is ", "are ", "do ", "does ",
+        "explain ", "tell me ", "give me ", "define ",
+    )
+    if t.endswith("?") or t.startswith(starts):
+        return True
+    return False
+
+
+def answer_general_question(question: str, llm_level: str = "standard") -> str:
+    q = (question or "").strip()
+    if not q:
+        return "Please share your question."
+    if _is_fast_level(llm_level):
+        return (
+            "Quick answer:\n"
+            "I can help with general questions too. "
+            f"For your question — \"{q}\" — the best next step is to break it into goal, constraints, and one concrete action.\n"
+            "If you want, I can also give a deeper explanation in high mode."
+        )
+
+    prompt = f"""
+You are a helpful assistant. Answer the user's general question clearly and directly.
+Rules:
+- Be concise and practical.
+- If the question is broad, give a short answer plus 2-3 concrete points.
+- Do not ask the user for extra fields.
+
+User question: {q}
+"""
+    out = run_generation(prompt, max_new_tokens=130, llm_level=llm_level)
+    if out:
+        return out.strip()
+    return (
+        "I can answer that. "
+        "A practical way is to define the objective, list constraints, and choose one next action."
+    )
+
+
 def solve_conflict(
     event1,
     event2,
@@ -1672,18 +1716,20 @@ methods=["POST"]
 )
 def resolve():
     data = request.get_json(silent=True) or {}
+    llm_level = _coerce_llm_level(data.get("llm_level"), "standard")
+    email_text = str(data.get("email", "")).strip()
 
     required_fields = ("event1", "event2", "priority", "email")
     missing_fields = [field for field in required_fields if not str(data.get(field, "")).strip()]
     if missing_fields:
+        if email_text and _looks_like_general_question(email_text):
+            return jsonify({"result": answer_general_question(email_text, llm_level=llm_level)})
         return jsonify(
             {
                 "error": "Missing required fields",
                 "missing": missing_fields
             }
         ), 400
-
-    llm_level = _coerce_llm_level(data.get("llm_level"), "standard")
 
     try:
         result=solve_conflict(

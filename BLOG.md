@@ -76,3 +76,19 @@ AetherMind is a practical pattern for personal AI agents:
 
 It moves beyond static assistants toward robust, decision-capable AI agents for daily life.
 
+## Latest Production Updates
+
+For final demo/pitch readiness, we updated deployment and runtime behavior:
+- default inference model is `google/flan-t5-large` (`LIFEOS_MODEL_NAME`),
+- fast UX mode is now the default in the app (`standard` tier) for low-latency live demos,
+- heavy routes still support `advanced` / `high` when deeper generation is needed,
+- backend model loading is thread-safe to avoid duplicate loads under concurrent requests,
+- frontend now has stronger network error guidance for all feature panels.
+
+## Hugging Face Spaces Deployment Notes
+
+- Space SDK: **Docker**
+- Required README metadata block is included in `README.md`
+- App serves correctly on Space port via `PORT` env handling
+- Key health endpoint: `/health`
+

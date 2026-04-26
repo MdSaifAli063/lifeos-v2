@@ -8,7 +8,8 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=production
-      - LIFEOS_MODEL_NAME=google/flan-t5-base
+      - PORT=5000
+      - LIFEOS_MODEL_NAME=google/flan-t5-large
     volumes:
       - ./demo_scenarios.json:/app/demo_scenarios.json
       - ./training_outputs:/app/training_outputs

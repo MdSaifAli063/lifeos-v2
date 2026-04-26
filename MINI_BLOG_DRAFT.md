@@ -1,74 +1,78 @@
-# AetherMind: Autonomous Conflict-Resolution Agent in OpenEnv
+# AetherMind: Building an AI Agent for Real-Life Conflict Resolution
 
-AetherMind is an autonomous AI agent that resolves real-world conflicts such as overlapping commitments, difficult email responses, and negotiation trade-offs.
+AetherMind is an OpenEnv-based AI agent designed for realistic personal workflow conflicts: overlapping meetings, family-vs-work decisions, difficult email replies, and negotiation trade-offs.
 
-## The Problem
+## The Core Problem
 
-Most assistants fail when:
-- priorities collide (work vs personal commitments),
-- rules change unexpectedly (schema/policy drift),
-- memory of prior preferences is required.
+Most assistants work well only in clean conditions. Real users face:
+- competing priorities,
+- emotional communication,
+- changing policies/API contracts (schema drift),
+- and repeated decisions that require memory of past preferences.
 
-## Our Environment Innovation
+AetherMind is built specifically for this messy, real-world setting.
 
-We built an OpenEnv-compliant environment with:
-- memory-aware decision context,
-- schema drift simulation,
-- multi-step workflow planning,
-- delegation/tool execution,
-- coherent reward shaping for better behavior.
+## What We Built
 
-Core implementation:
+We created an OpenEnv-compliant environment and agent stack that includes:
+- memory-aware context and personalization,
+- schema/policy drift simulation,
+- multi-step planning and delegation,
+- reward-driven behavior optimization.
+
+Main modules:
 - `openenv_env/env.py`
 - `openenv_env/memory.py`
 - `openenv_env/schema_manager.py`
 - `openenv_env/workflow_engine.py`
 - `openenv_env/reward.py`
 
-## Agent Capabilities
+## Agent Features in the Demo
 
-- Emotion detection module
-- Response rewriter (angry -> calm professional)
-- Mediation mode (neutral facilitation)
-- Conflict history tracking
-- Predictive and policy-aware conflict handling
+AetherMind command center supports:
+- Conflict Resolver
+- Emotion Detection
+- Response Rewriter (angry -> calm)
+- Mediation Mode
+- Conflict History
+- What-If Simulation (risk/benefit outcomes)
+- Ethical Decision Filter
+- Feedback Reinforcement Loop
 
-## Training Setup (HF TRL PPO)
+Frontend and APIs are fully connected for live interactions.
 
-We train using HF TRL PPO:
-- Full pipeline: `training/train_ppo.py`
-- Minimal Colab script: `training/train_ppo_colab.py`
+## Training Pipeline (HF TRL PPO)
 
-Run:
+We train with PPO using Hugging Face TRL:
+- full training script: `training/train_ppo.py`
+- Colab-friendly script: `training/train_ppo_colab.py`
+
+Example run:
 
 ```bash
 python training/train_ppo.py --mode fast --output_dir training_outputs
 ```
 
-This generates reward logs:
-- `training_outputs/reward_log.csv`
-- `training_outputs/reward_log.json`
+Colab run also produces:
+- `training_outputs/reward_log_colab.json`
+- `training_outputs/reward_log_colab.csv`
 
-## Observable Improvement
+## Evidence of Improvement
 
-During training, reward metrics show improved alignment in:
-- priority handling,
+Training outputs track epoch-level rewards and behavior signals, showing progress in:
+- priority alignment,
 - policy compliance,
-- tool/delegation behavior.
+- delegation/tool execution quality.
 
-## Demo Experience
+These artifacts are used directly in pitch/demo to show measurable learning progress.
 
-The web command center (`frontend/frontend.html`) visualizes:
-- central agent-brain reasoning,
-- collaborating agent nodes,
-- progress and metrics,
-- conflict resolution outputs in real time.
+## Why This Matters
 
-## Why It Matters
+AetherMind is a practical pattern for personal AI agents:
+- grounded in realistic environment simulation,
+- adaptive under schema drift,
+- emotionally aware in communication,
+- and accountable through reward-based evaluation.
 
-AetherMind demonstrates a practical “Personal AI Agent Operating System” pattern:
-- environment-grounded reasoning,
-- memory and adaptation under drift,
-- measurable RL improvement,
-- human-friendly conflict outcomes.
+It moves beyond static assistants toward robust, decision-capable AI agents for daily life.
 
